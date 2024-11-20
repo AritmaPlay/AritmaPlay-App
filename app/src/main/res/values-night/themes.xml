@@ -3,5 +3,83 @@
     <style name="Base.Theme.AritmaPlay" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/yellow_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_100</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+
+    <style name="TextContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="TextContent.Title">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:textSize">42sp</item>
+    </style>
+    <style name="TextContent.Title.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextContent.LargeDisplay">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:textSize">60sp</item>
+    </style>
+    <style name="TextContent.LargeDisplay.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextContent.Heading">
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="TextContent.Heading.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextContent.Caption">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="TextContent.Caption.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextContent.Body">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextContent.Body.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextContent.Body.MarginLeftRight">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+    <style name="TextContent.Body.Blue">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="PrimaryButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/bg_button_primary</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="SecondaryButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/bg_button_secondary</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 </resources>
