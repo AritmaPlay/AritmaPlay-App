@@ -22,4 +22,12 @@
     <string name="password">Password</string>
     <string name="sign_up">Daftar</string>
     <string name="login">Masuk</string>
+
+
+    <!--sign up strings-->
+    <string name="hint_name">Masukkan nama</string>
+    <string name="name">Nama</string>
+    <string name="password_confirmation">Konfirmasi Password</string>
+    <string name="signup_title">Daftar untuk Bergabung dengan Petualang Lain</string>
+    <string name="password_mismatch_message">Password tidak sama</string>
 </resources>
