@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">AritmaPlay</string>
     <string name="splash_screen_icon">AritmaPlay icon</string>
+
+    <!--onboarding strings-->
+    <string name="skip">Lewati</string>
+    <string name="onboarding_image">Gambar on boarding</string>
+    <string name="onboarding_text1">Ayo Mulai Petualangan Matematika</string>
+    <string name="onboarding_text2">Setiap Soal Adalah Petualangan Baru</string>
+    <string name="onboarding_text3">Bermain, Belajar, dan Bertumbuh Bersama!</string>
+    <string name="next">Selanjutnya</string>
+    <string name="start">Ayo Mulai</string>
 </resources>
