@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.aritmaplay.app.MainActivity
 import com.aritmaplay.app.R
 import com.aritmaplay.app.databinding.ActivityOnBoardingBinding
+import com.aritmaplay.app.ui.login.LoginActivity
 
 class OnBoardingActivity : AppCompatActivity() {
 
@@ -29,7 +29,7 @@ class OnBoardingActivity : AppCompatActivity() {
         updateOnboardingScreen()
 
         binding.skipButton.setOnClickListener {
-            goToMainActivity()
+            goToLoginActivity()
         }
 
         binding.nextButton.setOnClickListener {
@@ -37,7 +37,7 @@ class OnBoardingActivity : AppCompatActivity() {
                 currentStep++
                 updateOnboardingScreen()
             } else {
-                goToMainActivity()
+                goToLoginActivity()
             }
         }
     }
@@ -54,8 +54,8 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.skipButton.visibility = if (currentStep == onboardingData.size - 1) View.GONE else View.VISIBLE
     }
 
-    private fun goToMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+    private fun goToLoginActivity() {
+        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 
