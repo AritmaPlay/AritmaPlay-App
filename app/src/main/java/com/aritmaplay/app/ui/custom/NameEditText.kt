@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
 import com.aritmaplay.app.R
 
 
@@ -20,7 +21,11 @@ class NameEditText @JvmOverloads constructor(
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
+                if (s.toString().isNotEmpty()) {
+                    setBackgroundColor(ContextCompat.getColor(context, R.color.yellow_200))
+                } else {
+                    setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
+                }
             }
 
             override fun afterTextChanged(s: Editable) {
