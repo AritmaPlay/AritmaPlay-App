@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aritmaplay.app.MainActivity
 import com.aritmaplay.app.databinding.ActivityLoginBinding
+import com.aritmaplay.app.ui.signup.SignUpActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -26,6 +27,10 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "Email: $email\nPassword: $password", Toast.LENGTH_SHORT).show()
             goToMainActivity()
         }
+
+        binding.signupButton.setOnClickListener {
+            goToSignUpActivity()
+        }
     }
 
     private fun setupTextWatchers() {
@@ -41,6 +46,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
+    private fun goToSignUpActivity() {
+        startActivity(Intent(this, SignUpActivity::class.java))
         finish()
     }
 }
