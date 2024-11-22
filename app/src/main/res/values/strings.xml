@@ -1,5 +1,23 @@
 <resources>
     <string name="app_name">AritmaPlay</string>
+    <string name="test">The quick brown fox jumps over the lazy dog</string>
+    <string name="test2">80 EXP</string>
+    <string name="test3">Beli</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_rank">Peringkat</string>
+    <string name="title_profile">Profil</string>
+    <string name="sub_title_arena">Arena Petualangan</string>
+    <string name="tv_penjumlahan">Penjumlahan</string>
+    <string name="tv_pengurangan">Pengurangan</string>
+    <string name="welcome_greeting">Selamat Datang, Budi</string>
+    <string name="sub_greeting">Siap berpetualang hari ini?</string>
+    <string name="tv_perkalian">Perkalian</string>
+    <string name="tv_pembagian">Pembagian</string>
+    <string name="tv_exp_points">EXP Points</string>
+    <string name="tv_points">1200</string>
+    <string name="tv_number_rank">29</string>
+    <string name="tv_rank">Peringkat</string>
     <string name="splash_screen_icon">AritmaPlay icon</string>
 
     <!--onboarding strings-->
