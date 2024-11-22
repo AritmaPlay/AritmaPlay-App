@@ -37,6 +37,12 @@
     <style name="TextContent.Heading.Bold">
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="TextContent.SubHeading">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="TextContent.SubHeading.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="TextContent.Caption">
         <item name="android:textSize">12sp</item>
     </style>
