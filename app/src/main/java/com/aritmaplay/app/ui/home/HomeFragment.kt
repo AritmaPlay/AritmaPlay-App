@@ -26,6 +26,10 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
         }
 
+        binding.constraintPenjumlahan.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_quizFragment)
+        }
+
         return root
     }
 

@@ -55,4 +55,7 @@ dependencies {
 
     //glide
     implementation(libs.glide)
+
+    //draw
+    implementation(libs.draw)
 }
