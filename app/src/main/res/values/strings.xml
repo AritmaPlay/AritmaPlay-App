@@ -48,4 +48,25 @@
     <string name="password_confirmation">Konfirmasi Password</string>
     <string name="signup_title">Daftar untuk Bergabung dengan Petualang Lain</string>
     <string name="password_mismatch_message">Password tidak sama</string>
+
+    <!--profil strings-->
+    <string name="profile_image">Gambar profil</string>
+    <string name="user_name">Budi</string>
+    <string name="statictics_title">Statistik</string>
+    <string name="level">Level 54</string>
+    <string name="exp">21204 EXP</string>
+    <string name="total_quiz_title">Kuis Selesai</string>
+    <string name="total_quiz">120</string>
+    <string name="success_rate_title">Tingkat Keberhasilan</string>
+    <string name="success_rate">84%</string>
+    <string name="sum_title">Penjumlahan</string>
+    <string name="sum_rate">95%</string>
+    <string name="subtract_title">Pengurangan</string>
+    <string name="subtract_rate">92%</string>
+    <string name="multiply_title">Perkalian</string>
+    <string name="multiply_rate">75%</string>
+    <string name="divide_title">Pembagian</string>
+    <string name="divide_rate">62%</string>
+    <string name="logout">Keluar</string>
+    <string name="badge_exp">badge exp</string>
 </resources>

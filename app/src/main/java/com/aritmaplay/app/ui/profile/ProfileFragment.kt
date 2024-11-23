@@ -30,7 +30,12 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textProfile
+        Glide.with(this)
+            .load(R.drawable.ic_baseline_person_24)
+            .circleCrop()
+            .into(binding.profileImageView)
+
+        val textView: TextView = binding.tvStatisticsTitle
         notificationsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
