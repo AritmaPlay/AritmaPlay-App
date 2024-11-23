@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.aritmaplay.app.R
 import com.aritmaplay.app.databinding.FragmentQuizBinding
 
 class QuizFragment : Fragment() {
@@ -36,6 +38,8 @@ class QuizFragment : Fragment() {
                 Toast.makeText(requireContext(), "Data terkirim!", Toast.LENGTH_SHORT).show()
                 binding.drawView.clearCanvas(needsSaving = false)
                 isCanvasEmpty = true
+
+                findNavController().navigate(R.id.action_quizFragment_to_resultFragment)
             }
         }
 
