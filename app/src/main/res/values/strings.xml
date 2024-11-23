@@ -29,6 +29,12 @@
     <string name="next">Selanjutnya</string>
     <string name="start">Ayo Mulai</string>
 
+    <!-- riwayat pengerjaan strings -->
+    <string name="title_history">Riwayat Pengerjaan</string>
+    <string name="mode_petualangan">Mode Penjumlahan</string>
+    <string name="jumlah_history">8/10</string>
+    <string name="jumlah_xp">+800XP</string>
+
     <!--login strings-->
     <string name="hint_email">Masukkan email</string>
     <string name="error_email">Email tidak valid</string>
