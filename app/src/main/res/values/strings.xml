@@ -75,6 +75,13 @@
     <string name="divide_rate">62%</string>
     <string name="logout">Keluar</string>
     <string name="badge_exp">badge exp</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <!--quiz strings -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="quiz_mode">Mode Penjumlahan</string>
+    <string name="quiz_now">1</string>
+    <string name="total_quiz_progress">/10</string>
+    <string name="question">... + 2 = 5</string>
+    <string name="delete">Hapus</string>
+    <string name="send">Kirim</string>
 </resources>
