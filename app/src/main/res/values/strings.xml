@@ -84,4 +84,13 @@
     <string name="question">... + 2 = 5</string>
     <string name="delete">Hapus</string>
     <string name="send">Kirim</string>
+
+    <!--result strings-->
+    <string name="result">Hasil</string>
+    <string name="exp_result">80</string>
+    <string name="exp_title">EXP</string>
+    <string name="rank_title">Peringkatmu saat ini</string>
+    <string name="rank_result">9</string>
+    <string name="feedback">Tidak apa-apa kalau jawabanmu belum tepat! Setiap kesalahan adalah langkah menuju keberhasilan. Yang penting kamu sudah berusaha, dan dengan latihan, kamu akan makin jago. Terus semangat belajar, ya! Kesalahan ini adalah bagian dari proses belajar, jadi tetaplah percaya diri! 🌟</string>
+    <string name="go_title">Mulai Lagi!</string>
 </resources>
