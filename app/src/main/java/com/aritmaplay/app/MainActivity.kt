@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.historyFragment, R.id.quizFragment -> {
+                R.id.historyFragment, R.id.quizFragment, R.id.resultFragment -> {
                     binding.navView.visibility = View.GONE
                     supportActionBar?.show()
                 }
