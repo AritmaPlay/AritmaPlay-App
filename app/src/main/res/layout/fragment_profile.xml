@@ -245,6 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="48dp"
                         android:text="@string/logout"
+                        app:backgroundTint="@null"
                         android:background="@drawable/bg_button_secondary"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/statisticsCardView"
