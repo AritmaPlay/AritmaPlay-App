@@ -93,4 +93,11 @@
     <string name="rank_result">9</string>
     <string name="feedback">Tidak apa-apa kalau jawabanmu belum tepat! Setiap kesalahan adalah langkah menuju keberhasilan. Yang penting kamu sudah berusaha, dan dengan latihan, kamu akan makin jago. Terus semangat belajar, ya! Kesalahan ini adalah bagian dari proses belajar, jadi tetaplah percaya diri! 🌟</string>
     <string name="go_title">Mulai Lagi!</string>
+
+    <!--rank strings -->
+    <string name="list_number_rank">1</string>
+    <string name="nama_rank">Budi</string>
+    <string name="jumlah_exp_rank">1000 EXP</string>
+    <string name="title_peringkat">Peringkat</string>
+
 </resources>
