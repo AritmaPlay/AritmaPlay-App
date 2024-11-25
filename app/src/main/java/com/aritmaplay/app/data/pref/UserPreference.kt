@@ -1,6 +1,7 @@
 package com.aritmaplay.app.data.pref
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -19,6 +20,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             preferences[TOKEN_KEY] = user.token
             preferences[IS_LOGIN_KEY] = true
         }
+        Log.d("UserPreference", "Session saved: ${user.token}")
     }
 
     fun getSession(): Flow<UserModel> {
@@ -34,6 +36,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         dataStore.edit { preferences ->
             preferences.clear()
         }
+        Log.d("UserPreference", "Session destroy")
     }
 
     companion object {
