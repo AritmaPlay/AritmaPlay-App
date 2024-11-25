@@ -3,14 +3,17 @@ package com.aritmaplay.app.ui.splashscreen
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import com.aritmaplay.app.MainActivity
 import com.aritmaplay.app.R
+import com.aritmaplay.app.data.pref.UserPreference
+import com.aritmaplay.app.data.pref.dataStore
 import com.aritmaplay.app.ui.onboarding.OnBoardingActivity
+import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -23,10 +26,19 @@ class SplashScreenActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, OnBoardingActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 2000)
+
+        val userPreference = UserPreference.getInstance(dataStore)
+
+        lifecycleScope.launch {
+            userPreference.getSession().collect { user ->
+                if (user.isLogin) {
+                    startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+                    finish()
+                } else {
+                    startActivity(Intent(this@SplashScreenActivity, OnBoardingActivity::class.java))
+                    finish()
+                }
+            }
+        }
     }
 }

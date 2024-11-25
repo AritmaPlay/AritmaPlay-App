@@ -58,4 +58,7 @@ dependencies {
 
     //draw
     implementation(libs.draw)
+
+    //DataStore
+    implementation(libs.androidx.datastore.preferences)
 }

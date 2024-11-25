@@ -1,7 +1,13 @@
 package com.aritmaplay.app
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -9,9 +15,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.aritmaplay.app.databinding.ActivityMainBinding
+import com.aritmaplay.app.ui.onboarding.OnBoardingActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -21,6 +31,18 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                Log.d("MainActivity", "User is NOT logged in")
+                startActivity(Intent(this, OnBoardingActivity::class.java))
+                finish()
+            } else {
+                Log.d("MainActivity", "User is logged in: ${user.token}")
+            }
+        }
+
+        setupView()
 
         val navView: BottomNavigationView = binding.navView
 
@@ -49,6 +71,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 
     override fun onSupportNavigateUp(): Boolean {
