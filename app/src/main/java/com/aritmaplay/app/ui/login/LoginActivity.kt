@@ -5,16 +5,23 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.aritmaplay.app.MainActivity
 import com.aritmaplay.app.ViewModelFactory
+import com.aritmaplay.app.data.Result
 import com.aritmaplay.app.data.pref.UserModel
+import com.aritmaplay.app.data.pref.UserPreference
+import com.aritmaplay.app.data.pref.dataStore
 import com.aritmaplay.app.databinding.ActivityLoginBinding
 import com.aritmaplay.app.ui.signup.SignUpActivity
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModels<LoginViewModel> {
@@ -31,9 +38,54 @@ class LoginActivity : AppCompatActivity() {
         setupTextWatchers()
         setupView()
         setupAction()
+        observeViewModel()
+
+        val userPreference = UserPreference.getInstance(dataStore)
+
+        lifecycleScope.launch {
+            userPreference.getSession().collect { user ->
+                if (user.isLogin) {
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    finish()
+                }
+            }
+        }
 
         binding.signupButton.setOnClickListener {
             goToSignUpActivity()
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.loginResult.observe(this) { state ->
+            when (state) {
+                is Result.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    Log.d("LoginActivity", "Logging in...")
+                }
+
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    lifecycleScope.launch {
+                        val userPreference = UserPreference.getInstance(dataStore)
+                        userPreference.saveSession(UserModel(
+                            token = state.data.data.token,
+                            isLogin = true
+                        ))
+                        Log.d("LoginResponse", "Token: ${state.data.data.token}")
+                    }
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                }
+
+                is Result.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    Log.e("LoginActivity", "Error: ${state.message}")
+                }
+            }
         }
     }
 
@@ -75,11 +127,7 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            viewModel.saveSession(UserModel("sample_token"))
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
+            viewModel.login(email, password)
         }
     }
 
