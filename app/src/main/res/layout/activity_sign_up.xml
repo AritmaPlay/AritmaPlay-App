@@ -57,8 +57,7 @@
 
                 <TextView
                     android:id="@+id/nameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/TextContent.Caption.Bold"
                     android:layout_marginTop="16dp"
                     android:text="@string/name"
                     app:layout_constraintStart_toStartOf="parent"
@@ -85,8 +84,7 @@
 
                 <TextView
                     android:id="@+id/userNameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/TextContent.Caption.Bold"
                     android:layout_marginTop="16dp"
                     android:text="@string/user_name_title"
                     app:layout_constraintStart_toStartOf="parent"
