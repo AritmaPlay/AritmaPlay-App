@@ -20,15 +20,24 @@ class SignUpActivity : AppCompatActivity() {
 
         setupAction()
         setupTextWatchers()
-
     }
 
     private fun setupAction() {
         binding.signupButton.setOnClickListener {
             val name = binding.edSignupName.text.toString()
+            val userName = binding.edSignupUserName.text.toString()
             val email = binding.edSignupEmail.text.toString()
             val password = binding.edSignupPassword.text.toString()
             val confirmPassword = binding.edSignupConfirmationPassword.text.toString()
+
+            if (name.isEmpty() || userName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                Toast.makeText(
+                    this,
+                    "Isi semua data terlebih dahulu ya",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
 
             if (password != confirmPassword) {
                 Toast.makeText(
@@ -38,9 +47,6 @@ class SignUpActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
-            Toast.makeText(this,
-                "Name: $name Email: $email Password: $password", Toast.LENGTH_SHORT
-            ).show()
             goToLoginActivity()
         }
     }
@@ -48,11 +54,13 @@ class SignUpActivity : AppCompatActivity() {
     private fun setupTextWatchers() {
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
             override fun afterTextChanged(s: Editable?) {}
         }
 
         binding.edSignupName.addTextChangedListener(textWatcher)
+        binding.edSignupUserName.addTextChangedListener(textWatcher)
         binding.edSignupEmail.addTextChangedListener(textWatcher)
         binding.edSignupPassword.addTextChangedListener(textWatcher)
         binding.edSignupConfirmationPassword.addTextChangedListener(textWatcher)
