@@ -1,15 +1,27 @@
 package com.aritmaplay.app.ui.login
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aritmaplay.app.data.Result
 import com.aritmaplay.app.data.UserRepository
-import com.aritmaplay.app.data.pref.UserModel
+import com.aritmaplay.app.data.response.LoginResponse
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: UserRepository) : ViewModel() {
-    fun saveSession(user: UserModel) {
+    private val _loginResult = MutableLiveData<Result<LoginResponse>>()
+    val loginResult: LiveData<Result<LoginResponse>> = _loginResult
+
+    fun login(email: String, password: String) {
         viewModelScope.launch {
-            repository.saveSession(user)
+            _loginResult.value = Result.Loading
+            try {
+                val response = repository.login(email, password)
+                _loginResult.value = Result.Success(response)
+            } catch (e: Exception) {
+                _loginResult.value = Result.Error(e.toString())
+            }
         }
     }
 }

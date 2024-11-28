@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.aritmaplay.app.data.UserRepository
 import com.aritmaplay.app.di.Injection
 import com.aritmaplay.app.ui.login.LoginViewModel
+import com.aritmaplay.app.ui.signup.SignUpViewModel
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -17,6 +18,9 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
+                SignUpViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
