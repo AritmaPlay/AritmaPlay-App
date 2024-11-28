@@ -2,6 +2,7 @@ package com.aritmaplay.app.data
 
 import com.aritmaplay.app.data.pref.UserModel
 import com.aritmaplay.app.data.pref.UserPreference
+import com.aritmaplay.app.data.response.LoginResponse
 import com.aritmaplay.app.data.response.RegisterResponse
 import com.aritmaplay.app.data.retrofit.UserApiService
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +26,19 @@ class UserRepository private constructor(
 
     suspend fun register(username: String, name: String, email: String, password: String) : RegisterResponse {
         return apiService.register(username, name, email, password)
+    }
+
+    suspend fun login(email: String, password: String) : LoginResponse {
+        val response =  apiService.login(email, password)
+
+        if (!response.success) {
+            val user = UserModel(
+                token = response.data.token,
+                isLogin = true
+            )
+            saveSession(user)
+        }
+        return response
     }
 
     companion object {
