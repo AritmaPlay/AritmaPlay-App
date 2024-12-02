@@ -1,17 +1,16 @@
 package com.aritmaplay.app.ui.login
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import com.aritmaplay.app.MainActivity
 import com.aritmaplay.app.ViewModelFactory
@@ -32,12 +31,14 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupTextWatchers()
-        setupView()
         setupAction()
+        setupSystemBar()
         observeViewModel()
 
         val userPreference = UserPreference.getInstance(dataStore)
@@ -100,19 +101,6 @@ class LoginActivity : AppCompatActivity() {
         binding.edLoginPassword.addTextChangedListener(textWatcher)
     }
 
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
-    }
-
     private fun setupAction() {
         binding.loginButton.setOnClickListener {
             val email = binding.edLoginEmail.text.toString()
@@ -128,6 +116,13 @@ class LoginActivity : AppCompatActivity() {
             }
 
             viewModel.login(email, password)
+        }
+    }
+
+    private fun setupSystemBar() {
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightNavigationBars = true
+            isAppearanceLightStatusBars = true
         }
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.aritmaplay.app.MainActivity
@@ -14,6 +15,7 @@ import com.aritmaplay.app.data.pref.UserPreference
 import com.aritmaplay.app.data.pref.dataStore
 import com.aritmaplay.app.ui.onboarding.OnBoardingActivity
 import kotlinx.coroutines.launch
+
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -27,6 +29,8 @@ class SplashScreenActivity : AppCompatActivity() {
             insets
         }
 
+        setupSystemBar()
+
         val userPreference = UserPreference.getInstance(dataStore)
 
         lifecycleScope.launch {
@@ -39,6 +43,13 @@ class SplashScreenActivity : AppCompatActivity() {
                     finish()
                 }
             }
+        }
+    }
+
+    private fun setupSystemBar() {
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightNavigationBars = true
+            isAppearanceLightStatusBars = true
         }
     }
 }
