@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import com.aritmaplay.app.R
 import com.aritmaplay.app.databinding.ActivityOnBoardingBinding
 import com.aritmaplay.app.ui.login.LoginActivity
@@ -19,6 +20,8 @@ class OnBoardingActivity : AppCompatActivity() {
 
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupSystemBar()
 
         onboardingData = listOf(
             Pair(R.drawable.on_boarding_1, getString(R.string.onboarding_text1)),
@@ -57,6 +60,13 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun goToLoginActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    private fun setupSystemBar() {
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightNavigationBars = true
+            isAppearanceLightStatusBars = true
+        }
     }
 
     override fun onBackPressed() {

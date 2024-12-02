@@ -7,8 +7,10 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import com.aritmaplay.app.R
 import com.aritmaplay.app.ViewModelFactory
 import com.aritmaplay.app.databinding.ActivitySignUpBinding
@@ -24,11 +26,14 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupAction()
         setupTextWatchers()
+        setupSystemBar()
         observeViewModel()
     }
 
@@ -81,6 +86,13 @@ class SignUpActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             viewModel.register(name, userName, email, password)
+        }
+    }
+
+    private fun setupSystemBar() {
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightNavigationBars = true
+            isAppearanceLightStatusBars = true
         }
     }
 
