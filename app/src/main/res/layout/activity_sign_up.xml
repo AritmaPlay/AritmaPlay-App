@@ -27,9 +27,7 @@
         <TextView
             android:id="@+id/title_login"
             style="@style/TextContent.Heading.Bold"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/signup_title"

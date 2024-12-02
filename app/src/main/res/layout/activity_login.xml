@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/title_login"
         style="@style/TextContent.Title.Bold"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:padding="16dp"
         android:text="@string/login_title"
         android:textColor="@color/black"
