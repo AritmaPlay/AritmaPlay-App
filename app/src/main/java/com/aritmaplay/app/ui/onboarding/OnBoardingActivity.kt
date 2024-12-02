@@ -54,7 +54,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.progressbar.progress = progressPercentage
 
         binding.nextButton.text = if (currentStep == onboardingData.size - 1) getString(R.string.start) else getString(R.string.next)
-        binding.skipButton.visibility = if (currentStep == onboardingData.size - 1) View.GONE else View.VISIBLE
+        binding.skipButton.visibility = if (currentStep == onboardingData.size - 1) View.INVISIBLE else View.VISIBLE
     }
 
     private fun goToLoginActivity() {
