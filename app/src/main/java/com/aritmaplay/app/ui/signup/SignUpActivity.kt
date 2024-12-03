@@ -1,5 +1,7 @@
 package com.aritmaplay.app.ui.signup
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -58,6 +60,39 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun playAnimation() {
+        val titleAnimation = ObjectAnimator.ofFloat(binding.titleLogin, View.ALPHA, 0f, 1f).setDuration(100)
+        val nameTextAnimation = ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 0f, 1f).setDuration(100)
+        val nameInputAnimation = ObjectAnimator.ofFloat(binding.nameEditTextLayout, View.ALPHA, 0f, 1f).setDuration(100)
+        val userNameTextAnimation = ObjectAnimator.ofFloat(binding.userNameTextView, View.ALPHA, 0f, 1f).setDuration(100)
+        val userNameInputAnimation = ObjectAnimator.ofFloat(binding.userNameEditTextLayout, View.ALPHA, 0f, 1f).setDuration(100)
+        val emailTextAnimation = ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 0f, 1f).setDuration(100)
+        val emailInputAnimation = ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 0f, 1f).setDuration(100)
+        val passwordTextAnimation = ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 0f, 1f).setDuration(100)
+        val passwordInputAnimation = ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 0f, 1f).setDuration(100)
+        val confirmPasswordTextAnimation = ObjectAnimator.ofFloat(binding.passwordConfirmationTextView, View.ALPHA, 0f, 1f).setDuration(100)
+        val confirmPasswordInputAnimation = ObjectAnimator.ofFloat(binding.passwordConfirmationEditTextLayout, View.ALPHA, 0f, 1f).setDuration(100)
+        val signupButtonAnimation = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 0f, 1f).setDuration(100)
+
+        AnimatorSet().apply {
+            playSequentially(
+                titleAnimation,
+                nameTextAnimation,
+                nameInputAnimation,
+                userNameTextAnimation,
+                userNameInputAnimation,
+                emailTextAnimation,
+                emailInputAnimation,
+                passwordTextAnimation,
+                passwordInputAnimation,
+                confirmPasswordTextAnimation,
+                confirmPasswordInputAnimation,
+                signupButtonAnimation
+            )
+            startDelay = 100
+        }.start()
     }
 
     private fun setupAction() {
