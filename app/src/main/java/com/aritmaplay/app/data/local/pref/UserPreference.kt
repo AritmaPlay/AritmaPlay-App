@@ -1,4 +1,4 @@
-package com.aritmaplay.app.data.pref
+package com.aritmaplay.app.data.local.pref
 
 import android.content.Context
 import android.util.Log

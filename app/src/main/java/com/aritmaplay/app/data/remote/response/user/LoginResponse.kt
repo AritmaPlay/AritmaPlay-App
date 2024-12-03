@@ -1,4 +1,4 @@
-package com.aritmaplay.app.data.response
+package com.aritmaplay.app.data.remote.response.user
 
 data class LoginResponse(
     val success: Boolean,
