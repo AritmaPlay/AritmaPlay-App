@@ -1,5 +1,7 @@
 package com.aritmaplay.app.ui.login
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import com.aritmaplay.app.MainActivity
@@ -36,14 +39,12 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupTextWatchers()
         setupAction()
         setupSystemBar()
         observeViewModel()
 
-        val userPreference = UserPreference.getInstance(dataStore)
-
         lifecycleScope.launch {
+            val userPreference = UserPreference.getInstance(dataStore)
             userPreference.getSession().collect { user ->
                 if (user.isLogin) {
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
@@ -55,6 +56,37 @@ class LoginActivity : AppCompatActivity() {
         binding.signupButton.setOnClickListener {
             goToSignUpActivity()
         }
+
+        playAnimation()
+    }
+
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 2000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+
+        val titleAnimation = ObjectAnimator.ofFloat(binding.titleLogin, View.ALPHA, 0f, 1f).setDuration(100)
+        val emailTextAnimation = ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 0f, 1f).setDuration(100)
+        val emailInputAnimation = ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 0f, 1f).setDuration(100)
+        val passwordTextAnimation = ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 0f, 1f).setDuration(100)
+        val passwordInputAnimation = ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 0f, 1f).setDuration(100)
+        val loginButtonAnimation = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 0f, 1f).setDuration(100)
+        val signupButtonAnimation = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 0f, 1f).setDuration(100)
+
+        AnimatorSet().apply {
+            playSequentially(
+                titleAnimation,
+                emailTextAnimation,
+                emailInputAnimation,
+                passwordTextAnimation,
+                passwordInputAnimation,
+                signupButtonAnimation,
+                loginButtonAnimation
+            )
+            startDelay = 100
+        }.start()
     }
 
     private fun observeViewModel() {
@@ -69,10 +101,12 @@ class LoginActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.GONE
                     lifecycleScope.launch {
                         val userPreference = UserPreference.getInstance(dataStore)
-                        userPreference.saveSession(UserModel(
-                            token = state.data.data.token,
-                            isLogin = true
-                        ))
+                        userPreference.saveSession(
+                            UserModel(
+                                token = state.data.data.token,
+                                isLogin = true
+                            )
+                        )
                         Log.d("LoginResponse", "Token: ${state.data.data.token}")
                     }
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
@@ -88,17 +122,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun setupTextWatchers() {
-        val textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {}
-        }
-
-        binding.edLoginEmail.addTextChangedListener(textWatcher)
-        binding.edLoginPassword.addTextChangedListener(textWatcher)
     }
 
     private fun setupAction() {
