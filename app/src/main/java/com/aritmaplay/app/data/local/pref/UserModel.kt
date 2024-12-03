@@ -1,4 +1,4 @@
-package com.aritmaplay.app.data.pref
+package com.aritmaplay.app.data.local.pref
 
 data class UserModel(
     val token: String,

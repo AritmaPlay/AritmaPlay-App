@@ -1,4 +1,4 @@
-package com.aritmaplay.app.data.retrofit
+package com.aritmaplay.app.data.remote.retrofit.user
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

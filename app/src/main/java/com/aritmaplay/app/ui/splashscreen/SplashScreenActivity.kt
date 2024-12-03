@@ -11,8 +11,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.aritmaplay.app.MainActivity
 import com.aritmaplay.app.R
-import com.aritmaplay.app.data.pref.UserPreference
-import com.aritmaplay.app.data.pref.dataStore
+import com.aritmaplay.app.data.local.pref.UserPreference
+import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.ui.onboarding.OnBoardingActivity
 import kotlinx.coroutines.launch
 

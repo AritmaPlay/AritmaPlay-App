@@ -15,9 +15,9 @@ import androidx.lifecycle.lifecycleScope
 import com.aritmaplay.app.MainActivity
 import com.aritmaplay.app.ViewModelFactory
 import com.aritmaplay.app.data.Result
-import com.aritmaplay.app.data.pref.UserModel
-import com.aritmaplay.app.data.pref.UserPreference
-import com.aritmaplay.app.data.pref.dataStore
+import com.aritmaplay.app.data.local.pref.UserModel
+import com.aritmaplay.app.data.local.pref.UserPreference
+import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.databinding.ActivityLoginBinding
 import com.aritmaplay.app.ui.signup.SignUpActivity
 import kotlinx.coroutines.launch

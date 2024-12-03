@@ -1,10 +1,10 @@
-package com.aritmaplay.app.data
+package com.aritmaplay.app.repository
 
-import com.aritmaplay.app.data.pref.UserModel
-import com.aritmaplay.app.data.pref.UserPreference
-import com.aritmaplay.app.data.response.LoginResponse
-import com.aritmaplay.app.data.response.RegisterResponse
-import com.aritmaplay.app.data.retrofit.UserApiService
+import com.aritmaplay.app.data.local.pref.UserModel
+import com.aritmaplay.app.data.local.pref.UserPreference
+import com.aritmaplay.app.data.remote.response.user.LoginResponse
+import com.aritmaplay.app.data.remote.response.user.RegisterResponse
+import com.aritmaplay.app.data.remote.retrofit.user.UserApiService
 import kotlinx.coroutines.flow.Flow
 
 class UserRepository private constructor(

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.aritmaplay.app.data.UserRepository
-import com.aritmaplay.app.data.pref.UserModel
+import com.aritmaplay.app.repository.UserRepository
+import com.aritmaplay.app.data.local.pref.UserModel
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: UserRepository) : ViewModel() {

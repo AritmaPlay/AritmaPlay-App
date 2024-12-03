@@ -1,7 +1,7 @@
-package com.aritmaplay.app.data.retrofit
+package com.aritmaplay.app.data.remote.retrofit.user
 
-import com.aritmaplay.app.data.response.LoginResponse
-import com.aritmaplay.app.data.response.RegisterResponse
+import com.aritmaplay.app.data.remote.response.user.LoginResponse
+import com.aritmaplay.app.data.remote.response.user.RegisterResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

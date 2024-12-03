@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aritmaplay.app.data.Result
-import com.aritmaplay.app.data.UserRepository
-import com.aritmaplay.app.data.response.RegisterResponse
+import com.aritmaplay.app.repository.UserRepository
+import com.aritmaplay.app.data.remote.response.user.RegisterResponse
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() {
