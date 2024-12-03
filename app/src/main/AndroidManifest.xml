@@ -28,7 +28,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AritmaPlay.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
