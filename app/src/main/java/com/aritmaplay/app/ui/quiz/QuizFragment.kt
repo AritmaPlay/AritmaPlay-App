@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.aritmaplay.app.R
 import com.aritmaplay.app.ViewModelFactory
 import com.aritmaplay.app.data.Result
 import com.aritmaplay.app.databinding.FragmentQuizBinding
@@ -90,7 +89,8 @@ class QuizFragment : Fragment() {
                         viewModel.generateNewQuestion(operation = args.operation)
                     } else {
                         Toast.makeText(requireContext(), "Semua pertanyaan selesai!", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_quizFragment_to_resultFragment)
+                        val directToResult = QuizFragmentDirections.actionQuizFragmentToResultFragment(args.operation)
+                        findNavController().navigate(directToResult)
                     }
                 }
 
