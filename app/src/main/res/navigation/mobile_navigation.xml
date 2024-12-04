@@ -25,10 +25,6 @@
         android:label="History"
         tools:layout="@layout/fragment_history" />
 
-    <action
-        android:id="@+id/action_homeFragment_to_quizFragment"
-        app:destination="@id/quizFragment" />
-
     <fragment
         android:id="@+id/navigation_rank"
         android:name="com.aritmaplay.app.ui.rank.RankFragment"
@@ -39,13 +35,17 @@
         android:id="@+id/navigation_profile"
         android:name="com.aritmaplay.app.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile"/>
 
     <fragment
         android:id="@+id/quizFragment"
         android:name="com.aritmaplay.app.ui.quiz.QuizFragment"
         android:label="Quiz"
         tools:layout="@layout/fragment_quiz">
+
+        <argument
+            android:name="operation"
+            app:argType="string" />
 
         <action
             android:id="@+id/action_quizFragment_to_resultFragment"
@@ -57,11 +57,14 @@
         android:name="com.aritmaplay.app.ui.result.ResultFragment"
         android:label="Quiz"
         tools:layout="@layout/fragment_result">
+        <argument
+            android:name="operation"
+            app:argType="string" />
         <action
             android:id="@+id/action_resultFragment_to_homeFragment"
             app:destination="@+id/navigation_home" />
         <action
             android:id="@+id/action_resultFragment_to_quizFragment"
-        app:destination="@+id/quizFragment" />
+            app:destination="@+id/quizFragment" />
     </fragment>
 </navigation>

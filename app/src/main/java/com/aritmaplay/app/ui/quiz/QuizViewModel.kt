@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aritmaplay.app.data.Result
+import com.aritmaplay.app.data.local.quiz.QuizModel
 import com.aritmaplay.app.data.remote.response.handwriting.predict.HandwritingPredictResponse
 import com.aritmaplay.app.repository.QuizRepository
 import kotlinx.coroutines.launch
@@ -14,6 +15,14 @@ import kotlinx.coroutines.launch
 class QuizViewModel(private val quizRepository: QuizRepository) : ViewModel() {
     private val _predictResult = MutableLiveData<Result<HandwritingPredictResponse>>()
     val predictResult: LiveData<Result<HandwritingPredictResponse>> = _predictResult
+
+    private val _currentQuestion = MutableLiveData<QuizModel>()
+    val currentQuestion: LiveData<QuizModel> get() = _currentQuestion
+
+
+    fun generateNewQuestion(operation: String) {
+        _currentQuestion.value = quizRepository.generateQuestion(operation)
+    }
 
     fun predict(bitmap: Bitmap, context: Context) {
         viewModelScope.launch {
