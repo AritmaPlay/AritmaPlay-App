@@ -13,7 +13,8 @@ interface UserApiService {
         @Field("username") username: String,
         @Field("name") name: String,
         @Field("email") email: String,
-        @Field("password") password: String
+        @Field("password") password: String,
+        @Field("urlProfile") urlProfile: String,
     ): RegisterResponse
 
     @FormUrlEncoded

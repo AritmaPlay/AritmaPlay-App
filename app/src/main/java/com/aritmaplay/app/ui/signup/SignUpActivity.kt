@@ -121,7 +121,7 @@ class SignUpActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
-            viewModel.register(name, userName, email, password)
+            viewModel.register(name, userName, email, password, "https://api.dicebear.com/9.x/thumbs/svg")
         }
     }
 
