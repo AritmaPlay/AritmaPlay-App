@@ -14,11 +14,11 @@ class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() 
     private val _signupResult = MutableLiveData<Result<RegisterResponse>>()
     val signupResult: LiveData<Result<RegisterResponse>> = _signupResult
 
-    fun register(username: String, name: String, email: String, password: String, urlProfile: String) {
+    fun register(username: String, name: String, email: String, password: String) {
         viewModelScope.launch {
             _signupResult.value = Result.Loading
             try {
-                val response = userRepository.register(username, name, email, password, urlProfile)
+                val response = userRepository.register(username, name, email, password)
                 _signupResult.value = Result.Success(response)
             } catch (e: Exception) {
                 _signupResult.value = Result.Error(e.toString())

@@ -54,7 +54,7 @@
     <string name="password_confirmation">Konfirmasi Password</string>
     <string name="signup_title">Daftar untuk Bergabung dengan Petualang Lain</string>
     <string name="password_mismatch_message">Password tidak sama</string>
-    <string name="user_name_title">User Name</string>
+    <string name="user_name_title">Username</string>
 
     <!--profil strings-->
     <string name="profile_image">Gambar profil</string>
