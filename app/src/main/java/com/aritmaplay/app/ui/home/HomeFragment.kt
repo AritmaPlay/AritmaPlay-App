@@ -87,7 +87,13 @@ class HomeFragment : Fragment() {
             when (result) {
                 is Result.Success -> {
                     val data = result.data.data
-                    binding.tvWelcome.text = "Selamat Datang, ${data?.user?.name ?: "Unknown"}!"
+                    val index = data?.user?.name?.indexOf(' ')
+                    if (index == -1) {
+                        binding.tvWelcome.text = "Selamat Datang, ${data.user.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }}!"
+                    } else {
+                        val firstName = index?.let { data.user.name.substring(0, it) }.toString().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+                        binding.tvWelcome.text = "Selamat Datang, $firstName!"
+                    }
                 }
 
                 is Result.Error -> {

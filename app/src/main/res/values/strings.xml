@@ -10,7 +10,7 @@
     <string name="sub_title_arena">Arena Petualangan</string>
     <string name="tv_penjumlahan">Penjumlahan</string>
     <string name="tv_pengurangan">Pengurangan</string>
-    <string name="welcome_greeting">Selamat Datang, Budi</string>
+    <string name="welcome_greeting">Selamat Datang, </string>
     <string name="sub_greeting">Siap berpetualang hari ini?</string>
     <string name="tv_perkalian">Perkalian</string>
     <string name="tv_pembagian">Pembagian</string>
@@ -54,7 +54,7 @@
     <string name="password_confirmation">Konfirmasi Password</string>
     <string name="signup_title">Daftar untuk Bergabung dengan Petualang Lain</string>
     <string name="password_mismatch_message">Password tidak sama</string>
-    <string name="user_name_title">User Name</string>
+    <string name="user_name_title">Username</string>
 
     <!--profil strings-->
     <string name="profile_image">Gambar profil</string>

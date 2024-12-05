@@ -30,5 +30,8 @@ data class RegisterData(
     val email: String? = null,
 
     @field:SerializedName("username")
-    val username: String? = null
+    val username: String? = null,
+
+    @field:SerializedName("urlProfile")
+    val urlProfile: String? = null
 )

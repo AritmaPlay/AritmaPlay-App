@@ -5,6 +5,7 @@ import com.aritmaplay.app.data.local.pref.UserPreference
 import com.aritmaplay.app.data.remote.response.user.LoginResponse
 import com.aritmaplay.app.data.remote.response.user.RegisterResponse
 import com.aritmaplay.app.data.remote.retrofit.user.UserApiService
+import com.aritmaplay.app.util.AvatarGenerator.generateAvatarUrl
 import kotlinx.coroutines.flow.Flow
 
 class UserRepository private constructor(
@@ -24,8 +25,8 @@ class UserRepository private constructor(
         userPreference.logout()
     }
 
-    suspend fun register(username: String, name: String, email: String, password: String, urlProfile: String): RegisterResponse {
-        return apiService.register(username, name, email, password, urlProfile)
+    suspend fun register(username: String, name: String, email: String, password: String): RegisterResponse {
+        return apiService.register(username, name, email, password, generateAvatarUrl())
     }
 
     suspend fun login(email: String, password: String): LoginResponse {
