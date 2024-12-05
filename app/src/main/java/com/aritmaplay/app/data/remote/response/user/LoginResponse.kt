@@ -34,7 +34,7 @@ data class User(
     val createdAt: String? = null,
 
     @field:SerializedName("urlProfile")
-    val urlProfile: Any? = null,
+    val urlProfile: String? = null,
 
     @field:SerializedName("email")
     val email: String? = null,
