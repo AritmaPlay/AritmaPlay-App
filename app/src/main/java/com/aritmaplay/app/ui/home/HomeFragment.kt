@@ -1,19 +1,33 @@
 package com.aritmaplay.app.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.aritmaplay.app.R
+import com.aritmaplay.app.data.Result
+import com.aritmaplay.app.ViewModelFactory
+import com.aritmaplay.app.data.local.pref.UserPreference
+import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.databinding.FragmentHomeBinding
+import com.aritmaplay.app.ui.profile.ProfileViewModel
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: ProfileViewModel by activityViewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -47,21 +61,51 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
         }
 
-        val textView = binding.textView2
-        homeViewModel.text.observe(viewLifecycleOwner) { text ->
-            textView.text = text
-        }
-
         return root
     }
 
-    private fun navigateToQuiz(operation: String) {
-        val toQuizFragment = HomeFragmentDirections.actionHomeFragmentToQuizFragment(operation)
-        findNavController().navigate(toQuizFragment)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val userPreference = UserPreference.getInstance(requireContext().dataStore)
+
+        lifecycleScope.launch {
+            userPreference.getSession().collect { user ->
+                if (user.isLogin) {
+                    fetchProfile(user.token, user.userId)
+                } else {
+                    Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    @SuppressLint("SetTextI18n")
+    private fun fetchProfile(token: String, userId: Int) {
+        viewModel.getProfile("Bearer $token", userId).observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Success -> {
+                    val data = result.data.data
+                    binding.tvWelcome.text = "Selamat Datang, ${data?.user?.name ?: "Unknown"}!"
+                }
+
+                is Result.Error -> {
+                    Toast.makeText(context, "Error: ${result.message}", Toast.LENGTH_SHORT).show()
+                }
+
+                else -> {}
+            }
+        }
     }
-}
+
+        private fun navigateToQuiz(operation: String) {
+            val toQuizFragment = HomeFragmentDirections.actionHomeFragmentToQuizFragment(operation)
+            findNavController().navigate(toQuizFragment)
+        }
+
+        override fun onDestroyView() {
+            super.onDestroyView()
+            _binding = null
+        }
+    }
