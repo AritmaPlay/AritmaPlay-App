@@ -89,9 +89,9 @@ class HomeFragment : Fragment() {
                     val data = result.data.data
                     val index = data?.user?.name?.indexOf(' ')
                     if (index == -1) {
-                        binding.tvWelcome.text = "Selamat Datang, ${data.user.name}!"
+                        binding.tvWelcome.text = "Selamat Datang, ${data.user.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }}!"
                     } else {
-                        val firstName = index?.let { data.user.name.substring(0, it) }
+                        val firstName = index?.let { data.user.name.substring(0, it) }.toString().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
                         binding.tvWelcome.text = "Selamat Datang, $firstName!"
                     }
                 }
