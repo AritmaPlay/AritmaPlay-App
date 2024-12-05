@@ -24,19 +24,23 @@ class UserRepository private constructor(
         userPreference.logout()
     }
 
-    suspend fun register(username: String, name: String, email: String, password: String) : RegisterResponse {
+    suspend fun register(username: String, name: String, email: String, password: String): RegisterResponse {
         return apiService.register(username, name, email, password)
     }
 
-    suspend fun login(email: String, password: String) : LoginResponse {
-        val response =  apiService.login(email, password)
+    suspend fun login(email: String, password: String): LoginResponse {
+        val response = apiService.login(email, password)
 
-        if (!response.success) {
-            val user = UserModel(
-                token = response.data.token,
-                isLogin = true
-            )
-            saveSession(user)
+        if (response.success == true) {
+            response.data?.token?.let { token ->
+                val user = UserModel(
+                    token = token,
+                    isLogin = true
+                )
+                saveSession(user)
+            } ?: throw IllegalStateException("Token is null in LoginResponse")
+        } else {
+            throw Exception(response.message ?: "Login failed")
         }
         return response
     }

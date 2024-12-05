@@ -37,6 +37,7 @@ class SignUpActivity : AppCompatActivity() {
         setupTextWatchers()
         setupSystemBar()
         observeViewModel()
+        playAnimation()
     }
 
     private fun observeViewModel() {
