@@ -56,6 +56,7 @@ dependencies {
 
     //glide
     implementation(libs.glide)
+    annotationProcessor(libs.glide.compiler)
 
     //draw
     implementation(libs.draw)

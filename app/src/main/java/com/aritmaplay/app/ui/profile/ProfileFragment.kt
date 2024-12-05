@@ -88,6 +88,13 @@ class ProfileFragment : Fragment() {
                             (data?.stats?.quizKurangSuccessRate ?: 0) +
                             (data?.stats?.quizKaliSuccessRate ?: 0) +
                             (data?.stats?.quizBagiSuccessRate ?: 0)) / 4).toString() + "%"
+
+                    Glide.with(requireContext())
+                        .load(data?.user?.urlProfile)
+                        .circleCrop()
+                        .placeholder(R.drawable.ic_baseline_person_24)
+                        .error(R.drawable.ic_baseline_person_24)
+                        .into(binding.profileImageView)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE

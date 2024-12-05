@@ -1,7 +1,7 @@
 package com.aritmaplay.app.util
 
 object AvatarGenerator {
-    private const val BASE_URL = "https://api.dicebear.com/9.x/thumbs/svg"
+    private const val BASE_URL = "https://api.dicebear.com/9.x/thumbs/png"
     private const val SCALE = 75
     private val flipOption = listOf(true, false)
     private val faceRotationOption = listOf("-20", "-15", "-10", "-5", "0", "5", "10", "15", "20")
