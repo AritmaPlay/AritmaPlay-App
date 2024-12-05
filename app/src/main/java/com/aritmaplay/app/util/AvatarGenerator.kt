@@ -1,17 +1,52 @@
 package com.aritmaplay.app.util
 
 object AvatarGenerator {
-    const val BASE_URL = "https://api.dicebear.com/9.x/thumbs/svg"
-    const val FLIP = true
-    const val SCALE = 75
-    val backgroundColorOption = listOf("0a5b83", "1c799f", "69d2e7", "f1f4dc", "d1d4f9", "b6e3f4", "c0aede", "ffd5dc")
-    val shapeColorOption = listOf("0a5b83", "1c799f", "69d2e7", "f1f4dc", "d1d4f9", "b6e3f4", "c0aede", "ffd5dc")
-    val eyesOption = listOf("variant1W10", "variant1W12", "variant1W14", "variant1W16", "variant2W10", "variant2W12", "variant2W14", "variant2W16", "variant3W10", "variant3W12", "variant3W14", "variant3W16", "variant4W10", "variant4W12", "variant4W14", "variant4W16", "variant5W10", "variant5W12", "variant5W14", "variant5W16", "variant6W10", "variant6W12", "variant6W14", "variant6W16", "variant7W10", "variant7W12", "variant7W14", "variant7W16", "variant8W10", "variant8W12", "variant8W14", "variant8W16", "variant9W10", "variant9W12", "variant9W14", "variant9W16")
-    val faceOption = listOf("variant1", "variant2", "variant3", "variant4", "variant5")
-    val mouthOption = listOf("variant1", "variant2", "variant3", "variant4", "variant5")
+    private const val BASE_URL = "https://api.dicebear.com/9.x/thumbs/svg"
+    private const val SCALE = 75
+    private val flipOption = listOf(true, false)
+    private val faceRotationOption = listOf("-20", "-15", "-10", "-5", "0", "5", "10", "15", "20")
+    private val faceOffsetXOption = listOf("-5", "0", "5")
+    private val faceOffsetYOption = listOf("-5", "0", "5")
+    private val shapeRotationOption = listOf("-20", "-15", "-10", "-5", "0", "5", "10", "15", "20")
+    private val shapeOffsetXOption = listOf("-5", "0", "5")
+    private val shapeOffsetYOption = listOf("-5", "0", "5")
+    private val backgroundColorOption = listOf("FCFF9B", "5A8EFF", "484E5E", "E97474", "32FFAD", "DAA3ED")
+    private val shapeColorOption = listOf("FCFF9B", "5A8EFF", "484E5E", "E97474", "32FFAD", "DAA3ED")
+    private val eyesOption = listOf("variant1W10", "variant2W10", "variant3W10", "variant4W10", "variant5W10", "variant6W10", "variant7W10", "variant8W10", "variant9W10")
+    private val faceOption = listOf("variant1", "variant2", "variant3", "variant4", "variant5")
+    private val mouthOption = listOf("variant1", "variant2", "variant3", "variant4", "variant5")
 
     fun generateAvatarUrl(): String {
-        val url = "$BASE_URL?flip=$FLIP&scale=$SCALE&backgroundColor=${backgroundColorOption.random()}&shapeColor=${shapeColorOption.random()}&eyes=${eyesOption.random()}&face=${faceOption.random()}&mouth=${mouthOption.random()}"
-        return url;
+        val url = buildString {
+            append(BASE_URL)
+            append("?scale=")
+            append(SCALE)
+            append("&flip=")
+            append(flipOption.random())
+            append("&faceRotation=")
+            append(faceRotationOption.random())
+            append("&faceOffsetX=")
+            append(faceOffsetXOption.random())
+            append("&faceOffsetY=")
+            append(faceOffsetYOption.random())
+            append("&shapeRotation=")
+            append(shapeRotationOption.random())
+            append("&shapeOffsetX=")
+            append(shapeOffsetXOption.random())
+            append("&shapeOffsetY=")
+            append(shapeOffsetYOption.random())
+            append("&backgroundColor=")
+            append(backgroundColorOption.random())
+            append("&shapeColor=")
+            append(shapeColorOption.random())
+            append("&eyes=")
+            append(eyesOption.random())
+            append("&face=")
+            append(faceOption.random())
+            append("&mouth=")
+            append(mouthOption.random())
+        }
+
+        return url
     }
 }
