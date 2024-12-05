@@ -87,7 +87,13 @@ class HomeFragment : Fragment() {
             when (result) {
                 is Result.Success -> {
                     val data = result.data.data
-                    binding.tvWelcome.text = "Selamat Datang, ${data?.user?.name ?: "Unknown"}!"
+                    val index = data?.user?.name?.indexOf(' ')
+                    if (index == -1) {
+                        binding.tvWelcome.text = "Selamat Datang, ${data.user.name}!"
+                    } else {
+                        val firstName = index?.let { data.user.name.substring(0, it) }
+                        binding.tvWelcome.text = "Selamat Datang, $firstName!"
+                    }
                 }
 
                 is Result.Error -> {

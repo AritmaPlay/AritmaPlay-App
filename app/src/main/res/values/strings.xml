@@ -10,7 +10,7 @@
     <string name="sub_title_arena">Arena Petualangan</string>
     <string name="tv_penjumlahan">Penjumlahan</string>
     <string name="tv_pengurangan">Pengurangan</string>
-    <string name="welcome_greeting">Selamat Datang, Budi</string>
+    <string name="welcome_greeting">Selamat Datang, </string>
     <string name="sub_greeting">Siap berpetualang hari ini?</string>
     <string name="tv_perkalian">Perkalian</string>
     <string name="tv_pembagian">Pembagian</string>
