@@ -101,17 +101,22 @@ class LoginActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.GONE
                     lifecycleScope.launch {
                         val userPreference = UserPreference.getInstance(dataStore)
-                        userPreference.saveSession(
-                            UserModel(
-                                token = state.data.data.token,
-                                isLogin = true
+                        val token = state.data.data?.token
+                        if (token != null) {
+                            userPreference.saveSession(
+                                UserModel(token = token, isLogin = true)
                             )
-                        )
-                        Log.d("LoginResponse", "Token: ${state.data.data.token}")
+                            Log.d("LoginActivity", "Token saved: $token")
+                        } else {
+                            Log.e("LoginActivity", "Token is null")
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Token tidak ditemukan",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
 
