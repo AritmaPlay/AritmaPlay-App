@@ -6,6 +6,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -18,16 +19,18 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
     suspend fun saveSession(user: UserModel) {
         dataStore.edit { preferences ->
             preferences[TOKEN_KEY] = user.token
+            preferences[USER_ID_KEY] = user.userId
             preferences[IS_LOGIN_KEY] = true
         }
-        Log.d("UserPreference", "Session saved: ${user.token}")
+        Log.d("UserPreference", "Session saved: token=${user.token}, userId=${user.userId}")
     }
 
     fun getSession(): Flow<UserModel> {
         return dataStore.data.map { preferences ->
             UserModel(
-                preferences[TOKEN_KEY] ?: "",
-                preferences[IS_LOGIN_KEY] ?: false
+                token = preferences[TOKEN_KEY] ?: "",
+                userId = preferences[USER_ID_KEY] ?: -1,
+                isLogin = preferences[IS_LOGIN_KEY] ?: false
             )
         }
     }
@@ -36,7 +39,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         dataStore.edit { preferences ->
             preferences.clear()
         }
-        Log.d("UserPreference", "Session destroy")
+        Log.d("UserPreference", "Session destroyed")
     }
 
     companion object {
@@ -44,6 +47,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private var INSTANCE: UserPreference? = null
 
         private val TOKEN_KEY = stringPreferencesKey("token")
+        private val USER_ID_KEY = intPreferencesKey("userId")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {

@@ -102,18 +102,22 @@ class LoginActivity : AppCompatActivity() {
                     lifecycleScope.launch {
                         val userPreference = UserPreference.getInstance(dataStore)
                         val token = state.data.data?.token
-                        if (token != null) {
+                        val user = state.data.data?.user
+                        val userId = user?.userId
+                        if (token != null && userId != null) {
                             userPreference.saveSession(
-                                UserModel(token = token, isLogin = true)
+                                UserModel(
+                                    token = token,
+                                    userId = userId,
+                                    isLogin = true
+                                )
                             )
-                            Log.d("LoginActivity", "Token saved: $token")
+                            Log.d("LoginActivity", "Session saved: token=$token, userId=$userId")
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            finish()
                         } else {
-                            Log.e("LoginActivity", "Token is null")
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Token tidak ditemukan",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Log.e("LoginActivity", "Token or User ID is null")
+                            Toast.makeText(this@LoginActivity, "Data login tidak valid", Toast.LENGTH_SHORT).show()
                         }
                     }
                     startActivity(Intent(this, MainActivity::class.java))
