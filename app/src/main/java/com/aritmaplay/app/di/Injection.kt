@@ -7,6 +7,7 @@ import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.data.remote.retrofit.handwriting.HandwritingPredictApiConfig
 import com.aritmaplay.app.data.remote.retrofit.profile.ProfileApiConfig
 import com.aritmaplay.app.data.remote.retrofit.user.UserApiConfig
+import com.aritmaplay.app.repository.LeaderboardRepository
 import com.aritmaplay.app.repository.ProfileRepository
 import com.aritmaplay.app.repository.QuizRepository
 import kotlinx.coroutines.flow.first
@@ -31,5 +32,12 @@ object Injection {
         val user = runBlocking { pref.getSession().first() }
         val apiService = ProfileApiConfig.getApiService(user.token)
         return ProfileRepository.getInstance(pref, apiService)
+    }
+
+    fun provideLeaderboardRepository(context: Context): LeaderboardRepository {
+        val pref = UserPreference.getInstance(context.dataStore)
+        val user = runBlocking { pref.getSession().first() }
+        val apiService = ProfileApiConfig.getApiService(user.token)
+        return LeaderboardRepository.getInstance(pref, apiService)
     }
 }
