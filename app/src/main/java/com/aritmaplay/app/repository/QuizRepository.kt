@@ -61,7 +61,7 @@ class QuizRepository private constructor(
 
         do {
             operator = when (operation) {
-                "Penambahan" -> "+"
+                "Penjumlahan" -> "+"
                 "Pengurangan" -> "-"
                 "Perkalian" -> "x"
                 "Pembagian" -> ":"

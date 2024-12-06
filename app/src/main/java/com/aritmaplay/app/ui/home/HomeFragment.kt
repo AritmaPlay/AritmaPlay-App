@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         binding.constraintPenjumlahan.setOnClickListener {
-            navigateToQuiz("Penambahan")
+            navigateToQuiz("Penjumlahan")
         }
 
         binding.constraintPengurangan.setOnClickListener {
