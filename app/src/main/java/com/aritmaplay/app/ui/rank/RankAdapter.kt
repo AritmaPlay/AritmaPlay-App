@@ -1,33 +1,48 @@
 package com.aritmaplay.app.ui.rank
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.aritmaplay.app.data.remote.response.leaderboard.LeaderboardEntriesItem
 import com.aritmaplay.app.databinding.ItemRankBinding
 
-class RankAdapter(private val rankList: List<RankItem>) :
-    RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
+class RankAdapter: ListAdapter<LeaderboardEntriesItem, RankAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RankViewHolder {
-        val binding =
-            ItemRankBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return RankViewHolder(binding)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val binding = ItemRankBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RankViewHolder, position: Int) {
-        val rankItem = rankList[position]
-        holder.bind(rankItem, position + 1)
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val rank = getItem(position)
+        holder.bind(rank)
     }
 
-    override fun getItemCount(): Int = rankList.size
+    class MyViewHolder(private val binding: ItemRankBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
+        fun bind(rank: LeaderboardEntriesItem) {
+            binding.tvNumberListRank.text = rank.rank.toString()
+            binding.tvNameRank.text = rank.user?.name.toString()
+            binding.tvExpRank.text = "${rank.totalExpPerWeek} EXP"
 
-    inner class RankViewHolder(private val binding: ItemRankBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(rankItem: RankItem, rank: Int) {
-            binding.tvNumberListRank.text = rank.toString()
-            binding.tvNameRank.text = rankItem.name
-            binding.tvExpRank.text = "${rankItem.xp} XP"
         }
+    }
+
+    companion object {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<LeaderboardEntriesItem> =
+            object : DiffUtil.ItemCallback<LeaderboardEntriesItem>() {
+                override fun areItemsTheSame(oldItem: LeaderboardEntriesItem, newItem: LeaderboardEntriesItem): Boolean {
+                    return oldItem.rank == newItem.rank
+                }
+
+                @SuppressLint("DiffUtilEquals")
+                override fun areContentsTheSame(oldItem: LeaderboardEntriesItem, newItem: LeaderboardEntriesItem): Boolean {
+                    return oldItem == newItem
+                }
+            }
     }
 }
