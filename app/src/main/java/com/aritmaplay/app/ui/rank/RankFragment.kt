@@ -1,21 +1,33 @@
 package com.aritmaplay.app.ui.rank
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import com.aritmaplay.app.data.Result
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aritmaplay.app.R
 import com.aritmaplay.app.SpaceItemDecoration
+import com.aritmaplay.app.ViewModelFactory
+import com.aritmaplay.app.data.local.pref.UserPreference
+import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.databinding.FragmentRankBinding
-import com.aritmaplay.app.ui.history.HistoryAdapter
+import kotlinx.coroutines.launch
 
 class RankFragment : Fragment() {
+    private val viewModel by viewModels<RankViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     private var _binding: FragmentRankBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var rankAdapter: RankAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,25 +40,70 @@ class RankFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ViewModelProvider(this).get(RankViewModel::class.java)
+        val userPreference = UserPreference.getInstance(requireContext().dataStore)
 
-        binding.rvRank.layoutManager = LinearLayoutManager(requireContext())
-        val spaceInPixels = resources.getDimensionPixelSize(R.dimen.space_between_items)
-        binding.rvRank.addItemDecoration(SpaceItemDecoration(spaceInPixels))
-        val adapter = HistoryAdapter()
-        binding.rvRank.adapter = adapter
-
-        viewModel.rankList.observe(viewLifecycleOwner) { rankList ->
-            if (rankList != null) {
-                setupRecyclerView(rankList)
+        lifecycleScope.launch {
+            userPreference.getSession().collect { user ->
+                if (user.isLogin) {
+                    viewModel.getLeaderboard("Bearer ${user.token}")
+                } else {
+                    Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-    }
 
-    private fun setupRecyclerView(rankList: List<RankItem>) {
-        val adapter = RankAdapter(rankList)
-        binding.rvRank.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvRank.adapter = adapter
+        val spaceInPixels = resources.getDimensionPixelSize(R.dimen.space_between_items)
+        binding.rvRank.addItemDecoration(SpaceItemDecoration(spaceInPixels))
+        rankAdapter = RankAdapter()
+
+        viewModel.leaderboardList.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    Log.d("RankFragment", "Loading state: Memuat data leaderboard.")
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.rvRank.visibility = View.GONE
+                    binding.tvNoData.visibility = View.GONE
+                }
+                is Result.Success -> {
+                    Log.d("RankFragment", "Success state: Data leaderboard diterima.")
+                    val rankList= result.data.data?.leaderboardEntries
+                    if (rankList != null) {
+                        Log.d("RankFragment", "Jumlah entries diterima: ${rankList.size}")
+                        if (rankList.isEmpty()) {
+                            Log.d("RankFragment", "Entries kosong: Menampilkan pesan 'Tidak ada data'.")
+                            binding.rvRank.visibility = View.GONE
+                            binding.tvNoData.visibility = View.VISIBLE
+                        } else {
+                            Log.d("RankFragment", "Entries tersedia: Menampilkan RecyclerView.")
+                            binding.rvRank.visibility = View.VISIBLE
+                            binding.tvNoData.visibility = View.GONE
+                            val rankedList = rankList.mapIndexed { index, item ->
+                                item?.copy(rank = index + 1)
+                            }
+                            rankAdapter.submitList(rankedList)
+                        }
+                    } else {
+                        Log.w("RankFragment", "Data entries null. Tidak ada data untuk ditampilkan.")
+                        binding.rvRank.visibility = View.GONE
+                        binding.tvNoData.visibility = View.VISIBLE
+                    }
+                    binding.progressBar.visibility = View.GONE
+                }
+                is Result.Error -> {
+                    Log.e("RankFragment", "Error state: ${result.message}")
+                    binding.progressBar.visibility = View.GONE
+                    binding.rvRank.visibility = View.GONE
+                    binding.tvNoData.visibility = View.VISIBLE
+                    Toast.makeText(requireContext(), "Error loading data", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        binding.rvRank.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = rankAdapter
+        }
     }
 
     override fun onDestroyView() {
