@@ -100,5 +100,6 @@
     <string name="nama_rank">Budi</string>
     <string name="jumlah_exp_rank">1000 EXP</string>
     <string name="title_peringkat">Peringkat</string>
+    <string name="noData">Tidak ada data</string>
 
 </resources>
