@@ -19,9 +19,27 @@ class QuizViewModel(private val quizRepository: QuizRepository) : ViewModel() {
     private val _currentQuestion = MutableLiveData<QuizModel>()
     val currentQuestion: LiveData<QuizModel> get() = _currentQuestion
 
+    private val _correctAnswer = MutableLiveData<Int>()
 
     fun generateNewQuestion(operation: String) {
         _currentQuestion.value = quizRepository.generateQuestion(operation)
+    }
+
+    fun getDuration(startTime: Long, endTime: Long): Int {
+        return quizRepository.getDuration(startTime, endTime)
+    }
+
+    fun incrementCorrectAnswer(): Int {
+        return quizRepository.incrementCorrectAnswer()
+    }
+
+    fun getCorrectAnswer(): Int {
+        return quizRepository.getCorrectAnswer()
+    }
+
+    fun resetCorrectAnswer() {
+        quizRepository.resetCorrectAnswer()
+        _correctAnswer.value = 0
     }
 
     fun predict(bitmap: Bitmap, context: Context) {
