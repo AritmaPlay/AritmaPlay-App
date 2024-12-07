@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.aritmaplay.app.repository.UserRepository
 import com.aritmaplay.app.di.Injection
+import com.aritmaplay.app.repository.HistoryRepository
 import com.aritmaplay.app.repository.LeaderboardRepository
 import com.aritmaplay.app.repository.ProfileRepository
 import com.aritmaplay.app.repository.QuizRepository
+import com.aritmaplay.app.ui.history.HistoryViewModel
 import com.aritmaplay.app.ui.login.LoginViewModel
 import com.aritmaplay.app.ui.profile.ProfileViewModel
 import com.aritmaplay.app.ui.quiz.QuizViewModel
@@ -18,7 +20,8 @@ class ViewModelFactory(
     private val userRepository: UserRepository,
     private val quizRepository: QuizRepository,
     private val profileRepository: ProfileRepository,
-    private val leaderboardRepository: LeaderboardRepository
+    private val leaderboardRepository: LeaderboardRepository,
+    private val historyRepository: HistoryRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -42,6 +45,9 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(RankViewModel::class.java) -> {
                 RankViewModel(leaderboardRepository) as T
             }
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                HistoryViewModel(historyRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
     }
@@ -59,7 +65,8 @@ class ViewModelFactory(
                         Injection.provideUserRepository(context),
                         Injection.provideQuizRepository(),
                         Injection.provideProfileRepository(context),
-                        Injection.provideLeaderboardRepository(context)
+                        Injection.provideLeaderboardRepository(context),
+                        Injection.provideQuizHistoryRepository(context)
                     )
                 }
             }
