@@ -9,11 +9,13 @@ import com.aritmaplay.app.repository.HistoryRepository
 import com.aritmaplay.app.repository.LeaderboardRepository
 import com.aritmaplay.app.repository.ProfileRepository
 import com.aritmaplay.app.repository.QuizRepository
+import com.aritmaplay.app.repository.ResultRepository
 import com.aritmaplay.app.ui.history.HistoryViewModel
 import com.aritmaplay.app.ui.login.LoginViewModel
 import com.aritmaplay.app.ui.profile.ProfileViewModel
 import com.aritmaplay.app.ui.quiz.QuizViewModel
 import com.aritmaplay.app.ui.rank.RankViewModel
+import com.aritmaplay.app.ui.result.ResultViewModel
 import com.aritmaplay.app.ui.signup.SignUpViewModel
 
 class ViewModelFactory(
@@ -21,7 +23,8 @@ class ViewModelFactory(
     private val quizRepository: QuizRepository,
     private val profileRepository: ProfileRepository,
     private val leaderboardRepository: LeaderboardRepository,
-    private val historyRepository: HistoryRepository
+    private val historyRepository: HistoryRepository,
+    private val resultRepository: ResultRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -48,6 +51,9 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
                 HistoryViewModel(historyRepository) as T
             }
+            modelClass.isAssignableFrom(ResultViewModel::class.java) -> {
+                ResultViewModel(resultRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
     }
@@ -66,7 +72,8 @@ class ViewModelFactory(
                         Injection.provideQuizRepository(),
                         Injection.provideProfileRepository(context),
                         Injection.provideLeaderboardRepository(context),
-                        Injection.provideQuizHistoryRepository(context)
+                        Injection.provideQuizHistoryRepository(context),
+                        Injection.provideQuizResultRepository(context)
                     )
                 }
             }

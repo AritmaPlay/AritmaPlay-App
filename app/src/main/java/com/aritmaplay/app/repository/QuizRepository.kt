@@ -108,6 +108,25 @@ class QuizRepository private constructor(
         return QuizModel(question, correctAnswer)
     }
 
+    fun getDuration(startTime: Long, endTime: Long): Int {
+        return ((endTime - startTime) / 1000).toInt()
+    }
+
+    private var correctAnswer = 0
+
+    fun incrementCorrectAnswer(): Int {
+        correctAnswer++
+        return correctAnswer
+    }
+
+    fun getCorrectAnswer(): Int {
+        return correctAnswer
+    }
+
+    fun resetCorrectAnswer() {
+        correctAnswer = 0
+    }
+
     companion object {
         @Volatile
         private var instance: QuizRepository? = null

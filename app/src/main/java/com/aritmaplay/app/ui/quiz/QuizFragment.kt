@@ -27,6 +27,8 @@ class QuizFragment : Fragment() {
     private var currentQuestion: Int = 1
     private var isCanvasEmpty = true
 
+    private var startTime: Long = 0L
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +42,8 @@ class QuizFragment : Fragment() {
 
         val operation = args.operation
         binding.topAppBar.title = "Mode $operation"
+
+        startTime = System.currentTimeMillis()
 
         initDrawView()
         observeViewModel()
@@ -79,7 +83,8 @@ class QuizFragment : Fragment() {
                     val correctAnswer = viewModel.currentQuestion.value?.correctAnswer
                     Log.d("HandwritingPredict", "Predict: ${state.data.data}")
                     if (predictedAnswer == correctAnswer) {
-                        Toast.makeText(requireContext(), "Jawaban benar!", Toast.LENGTH_SHORT).show()
+                        val incrementCorrectAnswer = viewModel.incrementCorrectAnswer()
+                        Toast.makeText(requireContext(), "Jawaban benar! Total benar: $incrementCorrectAnswer", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(requireContext(), "Jawaban salah!", Toast.LENGTH_SHORT).show()
                     }
@@ -89,7 +94,13 @@ class QuizFragment : Fragment() {
                         viewModel.generateNewQuestion(operation = args.operation)
                     } else {
                         Toast.makeText(requireContext(), "Semua pertanyaan selesai!", Toast.LENGTH_SHORT).show()
-                        val directToResult = QuizFragmentDirections.actionQuizFragmentToResultFragment(args.operation)
+                        val endTime = System.currentTimeMillis()
+                        val duration = viewModel.getDuration(startTime, endTime)
+                        val correctAnswerCount = viewModel.getCorrectAnswer()
+                        viewModel.resetCorrectAnswer()
+                        Toast.makeText(requireContext(), "Lama pengerjaan anda: $duration", Toast.LENGTH_SHORT).show()
+                        Log.d("QuizDuration", "Lama pengerjaan anda: $duration")
+                        val directToResult = QuizFragmentDirections.actionQuizFragmentToResultFragment(args.operation, correctAnswerCount, duration)
                         findNavController().navigate(directToResult)
                     }
                 }
