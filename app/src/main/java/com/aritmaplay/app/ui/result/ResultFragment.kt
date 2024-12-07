@@ -26,6 +26,9 @@ class ResultFragment : Fragment() {
         val root: View = binding.root
 
         val operation = args.operation
+        val correctAnswerCount = args.correctAnswerCount * 10
+
+        binding.tvStatisticsResult.text = correctAnswerCount.toString()
 
         binding.homeButton.setOnClickListener {
             findNavController().navigate(R.id.action_resultFragment_to_homeFragment)
