@@ -1,6 +1,7 @@
 package com.aritmaplay.app.data.remote.retrofit.profile
 
 import com.aritmaplay.app.data.remote.response.leaderboard.LeaderboardResponse
+import com.aritmaplay.app.data.remote.response.quiz.QuizHistoryResponse
 import com.aritmaplay.app.data.remote.response.user.ProfileResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -18,4 +19,10 @@ interface ProfileApiService {
     suspend fun getLeaderboard(
         @Header("Authorization") token: String
     ): LeaderboardResponse
+
+    @GET("/api/quiz/user/{id}")
+    suspend fun getQuizHistory(
+        @Header("Authorization") token: String,
+        @Path("id") userId: Int
+    ): QuizHistoryResponse
 }
