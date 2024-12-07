@@ -39,17 +39,17 @@
         android:id="@+id/frameRank"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/bg_rounded_gray"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayoutRank"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:background="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayoutRank">
 
         <TextView
             android:id="@+id/tvNoData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/noData"
-            android:overScrollMode="never"
             android:layout_gravity="center"
+            android:overScrollMode="never"
+            android:text="@string/noData"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:padding="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </androidx.core.widget.NestedScrollView>
     </FrameLayout>
