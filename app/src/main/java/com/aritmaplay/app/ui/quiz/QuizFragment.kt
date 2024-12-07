@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.aritmaplay.app.R
 import com.aritmaplay.app.ViewModelFactory
 import com.aritmaplay.app.data.Result
 import com.aritmaplay.app.databinding.FragmentQuizBinding
@@ -100,8 +102,17 @@ class QuizFragment : Fragment() {
                         viewModel.resetCorrectAnswer()
                         Toast.makeText(requireContext(), "Lama pengerjaan anda: $duration", Toast.LENGTH_SHORT).show()
                         Log.d("QuizDuration", "Lama pengerjaan anda: $duration")
-                        val directToResult = QuizFragmentDirections.actionQuizFragmentToResultFragment(args.operation, correctAnswerCount, duration)
-                        findNavController().navigate(directToResult)
+                        val directToResult = QuizFragmentDirections.actionQuizFragmentToResultFragment(
+                            args.operation,
+                            correctAnswerCount,
+                            duration
+                        )
+                        findNavController().navigate(
+                            directToResult,
+                            NavOptions.Builder()
+                                .setPopUpTo(R.id.quizFragment, true)
+                                .build()
+                        )
                     }
                 }
 
