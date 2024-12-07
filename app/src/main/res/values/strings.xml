@@ -34,6 +34,7 @@
     <string name="mode_petualangan">Mode Penjumlahan</string>
     <string name="jumlah_history">8/10</string>
     <string name="jumlah_xp">+800XP</string>
+    <string name="duration">0</string>
 
     <!--login strings-->
     <string name="hint_email">Masukkan email</string>
