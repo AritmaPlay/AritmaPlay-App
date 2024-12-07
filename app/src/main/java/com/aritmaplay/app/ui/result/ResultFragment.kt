@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aritmaplay.app.R
@@ -76,7 +77,13 @@ class ResultFragment : Fragment() {
         }
 
         binding.homeButton.setOnClickListener {
-            findNavController().navigate(R.id.action_resultFragment_to_homeFragment)
+            findNavController().navigate(
+                R.id.action_resultFragment_to_homeFragment,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.quizFragment, true)
+                    .build()
+            )
         }
 
         binding.goButton.setOnClickListener {
