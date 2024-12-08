@@ -47,7 +47,26 @@ class ResultFragment : Fragment() {
         val totalExp = args.correctAnswerCount * 10
         val duration = args.duration
 
-        binding.tvStatisticsResult.text = totalExp .toString()
+        binding.tvExpNumber.text = totalExp.toString()
+        binding.tvAccuraccyNumber.text = buildString {
+            append((correctAnswerCount / 10.0 * 100).toInt())
+            append("%")
+        }
+        if (duration >= 60) {
+            val minute = duration / 60
+            val second = duration % 60
+            binding.tvTimeNumber.text = buildString {
+                append(minute)
+                append(":")
+                append(second)
+            }
+        } else {
+            binding.tvTimeNumber.text = buildString {
+                append("0")
+                append(":")
+                append(duration)
+            }
+        }
 
         lifecycleScope.launch {
             val userPreference = UserPreference.getInstance(requireContext().dataStore)
@@ -84,8 +103,9 @@ class ResultFragment : Fragment() {
                 }
 
                 is Result.Success -> {
-                    Log.d("ResultFragment", "Data yang dikirim: ${state.data.data}")
                     binding.tvMotivation.text = state.data.data
+                    binding.progressBarResult.visibility = View.GONE
+                    binding.constraintLayoutResult.visibility = View.VISIBLE
                 }
 
                 is Result.Error -> {
