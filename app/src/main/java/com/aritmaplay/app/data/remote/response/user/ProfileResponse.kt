@@ -19,20 +19,20 @@ data class ProfileResponse(
 
 data class Stats(
 
-    @field:SerializedName("quiz_bagi_success_rate")
-    val quizBagiSuccessRate: Int? = null,
+    @field:SerializedName("quiz_penjumlahan_success_rate")
+    val quizPenjumlahanSuccessRate: Int? = null,
 
-    @field:SerializedName("quiz_tambah_success_rate")
-    val quizTambahSuccessRate: Int? = null,
+    @field:SerializedName("quiz_pengurangan_success_rate")
+    val quizPenguranganSuccessRate: Int? = null,
 
-    @field:SerializedName("quiz_kurang_success_rate")
-    val quizKurangSuccessRate: Int? = null,
+    @field:SerializedName("quiz_perkalian_success_rate")
+    val quizPerkalianSuccessRate: Int? = null,
 
     @field:SerializedName("quiz_done")
     val quizDone: Int? = null,
 
-    @field:SerializedName("quiz_kali_success_rate")
-    val quizKaliSuccessRate: Int? = null
+    @field:SerializedName("quiz_pembagian_success_rate")
+    val quizPembagianSuccessRate: Int? = null
 )
 
 data class ProfileData(
@@ -71,5 +71,8 @@ data class ProfileUser(
     val totalExp: Int? = null,
 
     @field:SerializedName("username")
-    val username: String? = null
+    val username: String? = null,
+
+    @field:SerializedName("userRank")
+    val userRank: Int? = null
 )

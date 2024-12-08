@@ -3,6 +3,7 @@ package com.aritmaplay.app.ui.profile
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,16 +79,17 @@ class ProfileFragment : Fragment() {
                     binding.tvLevel.text = data?.user?.level?.toString() ?: "0"
                     binding.experience.text = data?.user?.totalExp?.toString() ?: "0"
 
-                    binding.tvTotalQuiz.text = (data?.stats?.quizDone ?: 0).toString() + "%"
-                    binding.tvSumRate.text = (data?.stats?.quizTambahSuccessRate ?: 0).toString() + "%"
-                    binding.tvSubtractRate.text = (data?.stats?.quizKurangSuccessRate ?: 0).toString() + "%"
-                    binding.multiplyRate.text = (data?.stats?.quizKaliSuccessRate ?: 0).toString() + "%"
-                    binding.tvDivideRate.text = (data?.stats?.quizBagiSuccessRate ?: 0).toString() + "%"
+                    Log.d("ProfileFragment", "fetchProfile: ${data?.stats}")
+                    binding.tvTotalQuiz.text = (data?.stats?.quizDone ?: 0).toString()
+                    binding.tvSumRate.text = (data?.stats?.quizPenjumlahanSuccessRate ?: 0).toString() + "%"
+                    binding.tvSubtractRate.text = (data?.stats?.quizPenguranganSuccessRate ?: 0).toString() + "%"
+                    binding.multiplyRate.text = (data?.stats?.quizPerkalianSuccessRate ?: 0).toString() + "%"
+                    binding.tvDivideRate.text = (data?.stats?.quizPembagianSuccessRate ?: 0).toString() + "%"
 
-                    binding.tvSuccessRate.text = (((data?.stats?.quizTambahSuccessRate ?: 0) +
-                            (data?.stats?.quizKurangSuccessRate ?: 0) +
-                            (data?.stats?.quizKaliSuccessRate ?: 0) +
-                            (data?.stats?.quizBagiSuccessRate ?: 0)) / 4).toString() + "%"
+                    binding.tvSuccessRate.text = (((data?.stats?.quizPenjumlahanSuccessRate ?: 0) +
+                            (data?.stats?.quizPenguranganSuccessRate ?: 0) +
+                            (data?.stats?.quizPerkalianSuccessRate ?: 0) +
+                            (data?.stats?.quizPembagianSuccessRate ?: 0)) / 4).toString() + "%"
 
                     Glide.with(requireContext())
                         .load(data?.user?.urlProfile)
