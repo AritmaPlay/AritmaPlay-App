@@ -15,8 +15,8 @@
     <string name="tv_perkalian">Perkalian</string>
     <string name="tv_pembagian">Pembagian</string>
     <string name="tv_exp_points">EXP Points</string>
-    <string name="tv_points">1200</string>
-    <string name="tv_number_rank">29</string>
+    <string name="tv_points">0</string>
+    <string name="tv_number_rank">0</string>
     <string name="tv_rank">Peringkat</string>
     <string name="splash_screen_icon">AritmaPlay icon</string>
 
