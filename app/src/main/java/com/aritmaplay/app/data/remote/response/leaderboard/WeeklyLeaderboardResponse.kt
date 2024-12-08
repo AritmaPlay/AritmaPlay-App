@@ -2,7 +2,7 @@ package com.aritmaplay.app.data.remote.response.leaderboard
 
 import com.google.gson.annotations.SerializedName
 
-data class LeaderboardResponse(
+data class WeeklyLeaderboardResponse(
 
     @field:SerializedName("response_code")
     val responseCode: Int? = null,
