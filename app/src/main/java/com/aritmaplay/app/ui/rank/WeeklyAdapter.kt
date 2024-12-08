@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aritmaplay.app.data.remote.response.leaderboard.LeaderboardEntriesItem
 import com.aritmaplay.app.databinding.ItemRankBinding
 
-class RankAdapter: ListAdapter<LeaderboardEntriesItem, RankAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class WeeklyAdapter: ListAdapter<LeaderboardEntriesItem, WeeklyAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
