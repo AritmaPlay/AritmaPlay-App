@@ -17,6 +17,7 @@ import com.aritmaplay.app.ViewModelFactory
 import com.aritmaplay.app.data.local.pref.UserPreference
 import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.databinding.FragmentRankBinding
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
 class RankFragment : Fragment() {
@@ -81,6 +82,16 @@ class RankFragment : Fragment() {
                                 item?.copy(rank = index + 1)
                             }
                             rankAdapter.submitList(rankedList)
+
+                            lifecycleScope.launch {
+                                val user = userPreference.getSession().firstOrNull()
+                                val LoginUser = user?.let {
+                                    rankedList.find { it?.userId == user.userId }
+                                }
+                                binding.tvNumberListRank.text = LoginUser?.rank.toString()
+                                binding.tvNameRank.text = LoginUser?.user?.name.toString()
+                                binding.tvExpRank.text = "${LoginUser?.totalExpPerWeek} EXP"
+                            }
                         }
                     } else {
                         Log.w("RankFragment", "Data entries null. Tidak ada data untuk ditampilkan.")
