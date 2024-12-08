@@ -26,7 +26,11 @@ class RankAdapter: ListAdapter<LeaderboardEntriesItem, RankAdapter.MyViewHolder>
         @SuppressLint("SetTextI18n")
         fun bind(rank: LeaderboardEntriesItem) {
             binding.tvNumberListRank.text = rank.rank.toString()
-            binding.tvNameRank.text = rank.user?.name.toString()
+            binding.tvNameRank.text = rank.user?.name?.let {
+                it.replaceFirstChar { char ->
+                    if (char.isLowerCase()) char.titlecase() else char.toString()
+                }
+            }.orEmpty()
             binding.tvExpRank.text = "${rank.totalExpPerWeek} EXP"
 
         }
