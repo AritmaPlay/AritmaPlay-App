@@ -24,7 +24,7 @@ class MainViewModel(
         return userRepository.getSession().asLiveData()
     }
 
-    fun getProfile(token: String, userId: Int) {
+    fun getProfile(token: String, userId: Int, name: String) {
         _profileResult.value = Result.Loading
         viewModelScope.launch {
             try {
@@ -38,6 +38,7 @@ class MainViewModel(
                             token = token,
                             isLogin = true,
                             userId = userId,
+                            name = name
                         )
                         userRepository.saveSession(user)
                     }

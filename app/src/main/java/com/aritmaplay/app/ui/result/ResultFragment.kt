@@ -47,13 +47,33 @@ class ResultFragment : Fragment() {
         val totalExp = args.correctAnswerCount * 10
         val duration = args.duration
 
-        binding.tvStatisticsResult.text = totalExp .toString()
+        binding.tvExpNumber.text = totalExp.toString()
+        binding.tvAccuraccyNumber.text = buildString {
+            append((correctAnswerCount / 10.0 * 100).toInt())
+            append("%")
+        }
+        if (duration >= 60) {
+            val minute = duration / 60
+            val second = duration % 60
+            binding.tvTimeNumber.text = buildString {
+                append(minute)
+                append(":")
+                append(second)
+            }
+        } else {
+            binding.tvTimeNumber.text = buildString {
+                append("0")
+                append(":")
+                append(duration)
+            }
+        }
 
         lifecycleScope.launch {
             val userPreference = UserPreference.getInstance(requireContext().dataStore)
             userPreference.getSession().collect { user ->
                 if (user.isLogin) {
                     viewModel.result(user.token, operation, 10, duration, correctAnswerCount)
+                    viewModel.generateMotivation(user.name, correctAnswerCount, duration, 10, operation)
                 }
             }
         }
@@ -67,6 +87,25 @@ class ResultFragment : Fragment() {
                 is Result.Success -> {
                     Log.d("ResultFragment", "Success: User data posted successfully!")
                     Log.d("ResultFragment", "Data yang dikirim: ${state.data.data?.quiz}")
+                }
+
+                is Result.Error -> {
+                    Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+                    Log.e("ResultFragment", "Error: ${state.message}")
+                }
+            }
+        }
+
+        viewModel.motivation.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is Result.Loading -> {
+                    Log.d("ResultFragment", "Loading user data...")
+                }
+
+                is Result.Success -> {
+                    binding.tvMotivation.text = state.data.data
+                    binding.progressBarResult.visibility = View.GONE
+                    binding.constraintLayoutResult.visibility = View.VISIBLE
                 }
 
                 is Result.Error -> {

@@ -150,7 +150,7 @@
                                     android:padding="16dp">
 
                                     <TextView
-                                        android:id="@+id/tvTotalQuizTitle"
+                                        android:id="@+id/tvMotivation"
                                         style="@style/TextContent.Body"
                                         android:text="@string/total_quiz_title"
                                         app:layout_constraintStart_toStartOf="parent"
@@ -160,9 +160,9 @@
                                         android:id="@+id/tvTotalQuiz"
                                         style="@style/TextContent.Body.Bold"
                                         android:text="@string/total_quiz"
-                                        app:layout_constraintBottom_toBottomOf="@+id/tvTotalQuizTitle"
+                                        app:layout_constraintBottom_toBottomOf="@+id/tvMotivation"
                                         app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintTop_toTopOf="@id/tvTotalQuizTitle" />
+                                        app:layout_constraintTop_toTopOf="@id/tvMotivation" />
 
                                     <TextView
                                         android:id="@+id/tvSuccessRateTitle"
