@@ -79,6 +79,13 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             userPreference.getSession().collect { user ->
                 if (user.isLogin) {
+                    val index = user.name.indexOf(' ')
+                    if (index == -1) {
+                        binding.tvWelcome.text = "Selamat Datang, ${user.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }}!"
+                    } else {
+                        val firstName = index.let { user.name.substring(0, it) }.toString().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+                        binding.tvWelcome.text = "Selamat Datang, $firstName!"
+                    }
                     fetchProfile(user.token, user.userId)
                 } else {
                     Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT)
@@ -94,13 +101,6 @@ class HomeFragment : Fragment() {
             when (result) {
                 is Result.Success -> {
                     val data = result.data.data
-                    val index = data?.user?.name?.indexOf(' ')
-                    if (index == -1) {
-                        binding.tvWelcome.text = "Selamat Datang, ${data.user.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }}!"
-                    } else {
-                        val firstName = index?.let { data.user.name.substring(0, it) }.toString().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
-                        binding.tvWelcome.text = "Selamat Datang, $firstName!"
-                    }
                     binding.tvPoints.text = data?.user?.totalExp.toString()
                     binding.tvNumberRank.text = data?.user?.userRank.toString()
                 }

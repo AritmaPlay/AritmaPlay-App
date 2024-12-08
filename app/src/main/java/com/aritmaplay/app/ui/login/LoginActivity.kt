@@ -104,12 +104,14 @@ class LoginActivity : AppCompatActivity() {
                         val token = state.data.data?.token
                         val user = state.data.data?.user
                         val userId = user?.userId
-                        if (token != null && userId != null) {
+                        val name = user?.name
+                        if (token != null && userId != null && name != null) {
                             userPreference.saveSession(
                                 UserModel(
                                     token = token,
                                     userId = userId,
-                                    isLogin = true
+                                    isLogin = true,
+                                    name = name
                                 )
                             )
                             Log.d("LoginActivity", "Session saved: token=$token, userId=$userId")

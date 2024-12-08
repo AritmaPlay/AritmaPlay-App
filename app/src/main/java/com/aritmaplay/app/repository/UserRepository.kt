@@ -35,12 +35,15 @@ class UserRepository private constructor(
         if (response.success == true) {
             response.data?.token?.let { token ->
                 response.data.user?.userId?.let { userId ->
-                    val user = UserModel(
-                        token = token,
-                        isLogin = true,
-                        userId =  userId
-                    )
-                    saveSession(user)
+                    response.data.user.name?.let { name ->
+                        val user = UserModel(
+                            token = token,
+                            isLogin = true,
+                            userId = userId,
+                            name = name
+                        )
+                        saveSession(user)
+                    } ?: throw IllegalStateException("Token is null in LoginResponse")
                 } ?: throw IllegalStateException("Token is null in LoginResponse")
             } ?: throw IllegalStateException("Token is null in LoginResponse")
         } else {
