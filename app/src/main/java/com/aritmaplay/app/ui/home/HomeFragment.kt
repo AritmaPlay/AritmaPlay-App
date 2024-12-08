@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.aritmaplay.app.R
-import com.aritmaplay.app.data.Result
 import com.aritmaplay.app.ViewModelFactory
+import com.aritmaplay.app.data.Result
 import com.aritmaplay.app.data.local.pref.UserPreference
 import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.databinding.FragmentHomeBinding
@@ -29,7 +29,6 @@ class HomeFragment : Fragment() {
     private val viewModel: ProfileViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireContext())
     }
-
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
@@ -88,12 +87,12 @@ class HomeFragment : Fragment() {
                     }
                     fetchProfile(user.token, user.userId)
                 } else {
-                    Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
 
     @SuppressLint("SetTextI18n")
     private fun fetchProfile(token: String, userId: Int) {
@@ -102,9 +101,8 @@ class HomeFragment : Fragment() {
                 is Result.Success -> {
                     val data = result.data.data
                     binding.tvPoints.text = data?.user?.totalExp.toString()
-                    binding.tvNumberRank.text = data?.user?.userRank.toString()
+                    binding.tvNumberRank.text = data?.user?.userRank?.toString() ?: getString(R.string.list_number_rank)
                 }
-
                 is Result.Error -> {
                     Toast.makeText(context, "Error: ${result.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -114,13 +112,13 @@ class HomeFragment : Fragment() {
         }
     }
 
-        private fun navigateToQuiz(operation: String) {
-            val toQuizFragment = HomeFragmentDirections.actionHomeFragmentToQuizFragment(operation)
-            findNavController().navigate(toQuizFragment)
-        }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }
+    private fun navigateToQuiz(operation: String) {
+        val toQuizFragment = HomeFragmentDirections.actionHomeFragmentToQuizFragment(operation)
+        findNavController().navigate(toQuizFragment)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

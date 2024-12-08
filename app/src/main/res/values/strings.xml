@@ -103,11 +103,12 @@
 
     <!--rank strings -->
     <string name="list_number_rank">0</string>
-    <string name="nama_rank">User name</string>
+    <string name="nama_rank">-</string>
     <string name="jumlah_exp_rank">0 EXP</string>
     <string name="title_peringkat">Peringkat</string>
     <string name="noData">Tidak ada data</string>
     <string name="all_rank">Semua Peringkat</string>
-    <string name="my_rank">Peringakat Anda</string>
+    <string name="my_rank">Peringkat Anda</string>
+    <string name="first_time_user">Mulai dulu yuk!</string>
 
 </resources>

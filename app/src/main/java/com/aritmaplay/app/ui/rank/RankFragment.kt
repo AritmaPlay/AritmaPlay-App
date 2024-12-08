@@ -64,6 +64,8 @@ class RankFragment : Fragment() {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.rvRank.visibility = View.GONE
                     binding.tvNoData.visibility = View.GONE
+                    binding.tvExpRank.visibility = View.GONE
+                    binding.tvNameRank.visibility = View.GONE
                 }
                 is Result.Success -> {
                     Log.d("RankFragment", "Success state: Data leaderboard diterima.")
@@ -78,6 +80,8 @@ class RankFragment : Fragment() {
                             Log.d("RankFragment", "Entries tersedia: Menampilkan RecyclerView.")
                             binding.rvRank.visibility = View.VISIBLE
                             binding.tvNoData.visibility = View.GONE
+                            binding.tvExpRank.visibility = View.VISIBLE
+                            binding.tvNameRank.visibility = View.VISIBLE
                             val rankedList = rankList.mapIndexed { index, item ->
                                 item?.copy(rank = index + 1)
                             }
@@ -88,9 +92,21 @@ class RankFragment : Fragment() {
                                 val LoginUser = user?.let {
                                     rankedList.find { it?.userId == user.userId }
                                 }
-                                binding.tvNumberListRank.text = LoginUser?.rank.toString()
-                                binding.tvNameRank.text = LoginUser?.user?.name.toString()
-                                binding.tvExpRank.text = "${LoginUser?.totalExpPerWeek} EXP"
+                                if (LoginUser == null) {
+                                    binding.tvNumberListRank.text = getString(R.string.list_number_rank)
+                                    binding.tvExpRank.visibility = View.GONE
+                                    binding.tvNameRank.text = getString(R.string.first_time_user)
+
+                                } else {
+                                    binding.tvExpRank.visibility = View.VISIBLE
+                                    binding.tvNumberListRank.text = LoginUser.rank.toString()
+                                    binding.tvNameRank.text = LoginUser.user?.name?.let {
+                                        it.replaceFirstChar { char ->
+                                            if (char.isLowerCase()) char.titlecase() else char.toString()
+                                        }
+                                    }.orEmpty()
+                                    binding.tvExpRank.text = "${LoginUser.totalExpPerWeek} EXP"
+                                }
                             }
                         }
                     } else {
