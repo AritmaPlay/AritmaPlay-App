@@ -54,6 +54,7 @@ class ResultFragment : Fragment() {
             userPreference.getSession().collect { user ->
                 if (user.isLogin) {
                     viewModel.result(user.token, operation, 10, duration, correctAnswerCount)
+                    viewModel.generateMotivation("Nama", correctAnswerCount, duration, 10, operation)
                 }
             }
         }
@@ -67,6 +68,24 @@ class ResultFragment : Fragment() {
                 is Result.Success -> {
                     Log.d("ResultFragment", "Success: User data posted successfully!")
                     Log.d("ResultFragment", "Data yang dikirim: ${state.data.data?.quiz}")
+                }
+
+                is Result.Error -> {
+                    Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+                    Log.e("ResultFragment", "Error: ${state.message}")
+                }
+            }
+        }
+
+        viewModel.motivation.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is Result.Loading -> {
+                    Log.d("ResultFragment", "Loading user data...")
+                }
+
+                is Result.Success -> {
+                    Log.d("ResultFragment", "Data yang dikirim: ${state.data.data}")
+                    binding.tvMotivation.text = state.data.data
                 }
 
                 is Result.Error -> {

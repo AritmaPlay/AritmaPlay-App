@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aritmaplay.app.data.Result
 import com.aritmaplay.app.data.remote.response.result.ResultResponse
+import com.aritmaplay.app.data.remote.response.vertexai.generate.VertexAIGenerateMotivationResponse
 import com.aritmaplay.app.repository.ResultRepository
 import kotlinx.coroutines.launch
 
@@ -22,6 +23,21 @@ class ResultViewModel(private val resultRepository: ResultRepository) : ViewMode
                 _quizResult.value = Result.Success(response)
             } catch (e: Exception) {
                 _quizResult.value = Result.Error(e.toString())
+            }
+        }
+    }
+
+    private val _motivation = MutableLiveData<Result<VertexAIGenerateMotivationResponse>>()
+    val motivation: LiveData<Result<VertexAIGenerateMotivationResponse>> = _motivation
+
+    fun generateMotivation(name: String, correctQuestion: Int, time: Int, totalQuestion: Int, mode: String) {
+        viewModelScope.launch {
+            _motivation.value = Result.Loading
+            try {
+                val response = resultRepository.generateMotivation(name, correctQuestion, time, totalQuestion, mode)
+                _motivation.value = Result.Success(response)
+            } catch (e: Exception) {
+                _motivation.value = Result.Error(e.toString())
             }
         }
     }

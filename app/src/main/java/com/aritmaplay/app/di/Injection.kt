@@ -7,6 +7,7 @@ import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.data.remote.retrofit.handwriting.HandwritingPredictApiConfig
 import com.aritmaplay.app.data.remote.retrofit.profile.ProfileApiConfig
 import com.aritmaplay.app.data.remote.retrofit.user.UserApiConfig
+import com.aritmaplay.app.data.remote.retrofit.vertexai.VertexAIApiConfig
 import com.aritmaplay.app.repository.HistoryRepository
 import com.aritmaplay.app.repository.LeaderboardRepository
 import com.aritmaplay.app.repository.ProfileRepository
@@ -53,6 +54,7 @@ object Injection {
         val pref = UserPreference.getInstance(context.dataStore)
         val user = runBlocking { pref.getSession().first() }
         val apiService = ProfileApiConfig.getApiService(user.token)
-        return ResultRepository.getInstance(apiService)
+        val vertexAIApiService = VertexAIApiConfig.getVertexAIApiService()
+        return ResultRepository.getInstance(apiService, vertexAIApiService)
     }
 }

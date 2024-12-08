@@ -128,7 +128,7 @@
                             android:padding="16dp">
 
                             <TextView
-                                android:id="@+id/tvTotalQuizTitle"
+                                android:id="@+id/tvMotivation"
                                 style="@style/TextContent.Body"
                                 android:text="@string/feedback"
                                 app:layout_constraintStart_toStartOf="parent"
