@@ -98,10 +98,12 @@
     <string name="title_result">Hasil Akhir</string>
 
     <!--rank strings -->
-    <string name="list_number_rank">1</string>
-    <string name="nama_rank">Budi</string>
-    <string name="jumlah_exp_rank">1000 EXP</string>
+    <string name="list_number_rank">0</string>
+    <string name="nama_rank">User name</string>
+    <string name="jumlah_exp_rank">0 EXP</string>
     <string name="title_peringkat">Peringkat</string>
     <string name="noData">Tidak ada data</string>
+    <string name="all_rank">Semua Peringkat</string>
+    <string name="my_rank">Peringakat Anda</string>
 
 </resources>
