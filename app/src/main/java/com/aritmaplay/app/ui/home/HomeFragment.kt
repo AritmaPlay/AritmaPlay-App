@@ -101,6 +101,8 @@ class HomeFragment : Fragment() {
                         val firstName = index?.let { data.user.name.substring(0, it) }.toString().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
                         binding.tvWelcome.text = "Selamat Datang, $firstName!"
                     }
+                    binding.tvPoints.text = data?.user?.totalExp.toString()
+                    binding.tvNumberRank.text = data?.user?.userRank.toString()
                 }
 
                 is Result.Error -> {
