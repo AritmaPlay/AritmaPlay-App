@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.aritmaplay.app.data.remote.response.leaderboard.LeaderboardEntriesItem
+import com.aritmaplay.app.data.remote.response.leaderboard.DataItem
 import com.aritmaplay.app.databinding.ItemRankBinding
 
-class RankAdapter: ListAdapter<LeaderboardEntriesItem, RankAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class AllTimeAdapter: ListAdapter<DataItem, AllTimeAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,27 +24,25 @@ class RankAdapter: ListAdapter<LeaderboardEntriesItem, RankAdapter.MyViewHolder>
 
     class MyViewHolder(private val binding: ItemRankBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(rank: LeaderboardEntriesItem) {
+        fun bind(rank: DataItem) {
             binding.tvNumberListRank.text = rank.rank.toString()
-            binding.tvNameRank.text = rank.user?.name?.let {
-                it.replaceFirstChar { char ->
-                    if (char.isLowerCase()) char.titlecase() else char.toString()
-                }
-            }.orEmpty()
-            binding.tvExpRank.text = "${rank.totalExpPerWeek} EXP"
+            binding.tvNameRank.text = rank.name?.replaceFirstChar { char ->
+                if (char.isLowerCase()) char.titlecase() else char.toString()
+            } ?: ""
+            binding.tvExpRank.text = "${rank.totalExp} EXP"
 
         }
     }
 
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<LeaderboardEntriesItem> =
-            object : DiffUtil.ItemCallback<LeaderboardEntriesItem>() {
-                override fun areItemsTheSame(oldItem: LeaderboardEntriesItem, newItem: LeaderboardEntriesItem): Boolean {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<DataItem> =
+            object : DiffUtil.ItemCallback<DataItem>() {
+                override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
                     return oldItem.rank == newItem.rank
                 }
 
                 @SuppressLint("DiffUtilEquals")
-                override fun areContentsTheSame(oldItem: LeaderboardEntriesItem, newItem: LeaderboardEntriesItem): Boolean {
+                override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
                     return oldItem == newItem
                 }
             }

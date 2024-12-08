@@ -1,6 +1,7 @@
 package com.aritmaplay.app.data.remote.retrofit.profile
 
-import com.aritmaplay.app.data.remote.response.leaderboard.LeaderboardResponse
+import com.aritmaplay.app.data.remote.response.leaderboard.AllTimeLeaderboardResponse
+import com.aritmaplay.app.data.remote.response.leaderboard.WeeklyLeaderboardResponse
 import com.aritmaplay.app.data.remote.response.quiz.QuizHistoryResponse
 import com.aritmaplay.app.data.remote.response.result.ResultResponse
 import com.aritmaplay.app.data.remote.response.user.ProfileResponse
@@ -20,9 +21,14 @@ interface ProfileApiService {
     ): Response<ProfileResponse>
 
     @GET("/api/leaderboard-active")
-    suspend fun getLeaderboard(
+    suspend fun getWeeklyLeaderboard(
         @Header("Authorization") token: String
-    ): LeaderboardResponse
+    ): WeeklyLeaderboardResponse
+
+    @GET("/api/leaderboard-total-exp")
+    suspend fun getAllTimeLeaderboard(
+        @Header("Authorization") token: String
+    ): AllTimeLeaderboardResponse
 
     @GET("/api/quiz/user/{id}")
     suspend fun getQuizHistory(
