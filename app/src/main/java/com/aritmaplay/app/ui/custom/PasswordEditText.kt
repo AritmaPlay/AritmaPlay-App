@@ -15,15 +15,16 @@ class PasswordEditText @JvmOverloads constructor(
 ) : AppCompatEditText(context, attrs) {
 
     init {
+        setBackgroundResource(R.drawable.bg_email_edit_text_default)
         addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s != null) {
                     if (s.isNotEmpty()) {
-                        setBackgroundColor(ContextCompat.getColor(context, R.color.yellow_200))
+                        setBackgroundResource(R.drawable.bg_email_edit_text_filled)
                     } else {
-                        setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
+                        setBackgroundResource(R.drawable.bg_email_edit_text_default)
                     }
 
                     error = if (s.length < 8) {
