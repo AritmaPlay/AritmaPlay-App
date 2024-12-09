@@ -16,20 +16,12 @@ class NameEditText @JvmOverloads constructor(
 ) : AppCompatEditText(context, attrs) {
 
     init {
+        setBackgroundResource(R.drawable.bg_email_edit_text_default)
+
         addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.toString().isNotEmpty()) {
-                    setBackgroundColor(ContextCompat.getColor(context, R.color.yellow_200))
-                } else {
-                    setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
-                }
-            }
-
-            override fun afterTextChanged(s: Editable) {
-            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) {}
         })
     }
 
