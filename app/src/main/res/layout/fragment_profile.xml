@@ -37,19 +37,19 @@
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:indeterminateTint="@color/blue_900"
                 android:visibility="gone"
                 android:elevation="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
+                tools:visibility="visible"/>
 
             <FrameLayout
                 android:id="@+id/frameProfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:background="@color/gray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
@@ -123,8 +123,8 @@
                                 <TextView
                                     android:id="@+id/tvLevel"
                                     style="@style/TextContent.SubHeading.Bold"
-                                    android:text="@string/level"
                                     android:layout_marginStart="16dp"
+                                    android:text="@string/level"
                                     app:layout_constraintStart_toEndOf="@+id/ivExp"
                                     app:layout_constraintTop_toTopOf="@+id/ivExp" />
 
@@ -259,10 +259,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="48dp"
-                        android:text="@string/logout"
                         android:layout_marginBottom="92dp"
                         app:backgroundTint="@null"
                         android:background="@drawable/bg_button_secondary"
+                        android:text="@string/logout"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/statisticsCardView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

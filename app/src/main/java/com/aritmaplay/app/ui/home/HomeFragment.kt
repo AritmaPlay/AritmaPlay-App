@@ -98,13 +98,40 @@ class HomeFragment : Fragment() {
     private fun fetchProfile(token: String, userId: Int) {
         viewModel.getProfile("Bearer $token", userId).observe(viewLifecycleOwner) { result ->
             when (result) {
+                is Result.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.tvPoints.visibility = View.GONE
+                    binding.tvNumberRank.visibility = View.GONE
+                    binding.tvNoData.visibility = View.GONE
+                    binding.tvPoints.visibility = View.GONE
+                    binding.tvNumberRank.visibility = View.GONE
+                    binding.ivExp.visibility = View.GONE
+                    binding.tvExpPoints.visibility = View.GONE
+                    binding.ivPeringkat.visibility = View.GONE
+                    binding.tvRank.visibility = View.GONE
+                }
                 is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.tvPoints.visibility = View.VISIBLE
+                    binding.tvNumberRank.visibility = View.VISIBLE
+                    binding.ivExp.visibility = View.VISIBLE
+                    binding.tvExpPoints.visibility = View.VISIBLE
+                    binding.ivPeringkat.visibility = View.VISIBLE
+                    binding.tvRank.visibility = View.VISIBLE
                     val data = result.data.data
                     binding.tvPoints.text = data?.user?.totalExp.toString()
                     binding.tvNumberRank.text = data?.user?.userRank?.toString() ?: getString(R.string.list_number_rank)
                 }
                 is Result.Error -> {
-                    Toast.makeText(context, "Error: ${result.message}", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                    binding.tvPoints.visibility = View.GONE
+                    binding.tvNumberRank.visibility = View.GONE
+                    binding.ivExp.visibility = View.GONE
+                    binding.tvExpPoints.visibility = View.GONE
+                    binding.ivPeringkat.visibility = View.GONE
+                    binding.tvRank.visibility = View.GONE
+                    binding.tvNoData.visibility = View.VISIBLE
+                    Toast.makeText(requireContext(), "Error loading data", Toast.LENGTH_SHORT).show()
                 }
 
                 else -> {}

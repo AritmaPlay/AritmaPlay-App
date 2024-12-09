@@ -64,8 +64,12 @@ class AllTimeFragment : Fragment() {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.rvRank.visibility = View.GONE
                     binding.tvNoData.visibility = View.GONE
-                    binding.tvExpRank.visibility = View.GONE
+                    binding.tvExpRank.visibility = View.INVISIBLE
                     binding.tvNameRank.visibility = View.GONE
+                    binding.tvNumberListRank.visibility = View.INVISIBLE
+                    binding.tvNameRank.visibility = View.INVISIBLE
+                    binding.tvExpRank.visibility = View.INVISIBLE
+                    binding.linearLayoutIconRank.visibility = View.INVISIBLE
                 }
                 is Result.Success -> {
                     Log.d("AllTimeFragment", "Success state: Data leaderboard diterima.")
@@ -82,6 +86,9 @@ class AllTimeFragment : Fragment() {
                             binding.tvNoData.visibility = View.GONE
                             binding.tvExpRank.visibility = View.VISIBLE
                             binding.tvNameRank.visibility = View.VISIBLE
+                            binding.tvNumberListRank.visibility = View.VISIBLE
+                            binding.tvNameRank.visibility = View.VISIBLE
+                            binding.linearLayoutIconRank.visibility = View.VISIBLE
                             val rankedList = rankList.mapIndexed { index, item ->
                                 item?.copy(rank = index + 1)
                             }
@@ -96,6 +103,7 @@ class AllTimeFragment : Fragment() {
                                     binding.tvNumberListRank.text = getString(R.string.list_number_rank)
                                     binding.tvExpRank.visibility = View.GONE
                                     binding.tvNameRank.text = getString(R.string.first_time_user)
+                                    binding.linearLayoutIconRank.visibility = View.INVISIBLE
 
                                 } else {
                                     binding.tvExpRank.visibility = View.VISIBLE
@@ -119,6 +127,13 @@ class AllTimeFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                     binding.rvRank.visibility = View.GONE
                     binding.tvNoData.visibility = View.VISIBLE
+                    binding.tvExpRank.visibility = View.INVISIBLE
+                    binding.constraintLayoutMyRank.visibility = View.INVISIBLE
+                    binding.tvNameRank.visibility = View.INVISIBLE
+                    binding.tvNumberListRank.visibility = View.INVISIBLE
+                    binding.linearLayoutIconRank.visibility = View.INVISIBLE
+                    binding.tvMyRankTitle.visibility = View.INVISIBLE
+                    binding.tvAllRankTitle.visibility = View.INVISIBLE
                     Toast.makeText(requireContext(), "Error loading data", Toast.LENGTH_SHORT).show()
                 }
             }
