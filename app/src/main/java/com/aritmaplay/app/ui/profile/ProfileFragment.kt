@@ -76,8 +76,8 @@ class ProfileFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                     val data = result.data.data
                     binding.tvUserName.text = data?.user?.username ?: "Unknown"
-                    binding.tvLevel.text = data?.user?.level?.toString() ?: "0"
-                    binding.experience.text = data?.user?.totalExp?.toString() ?: "0"
+                    binding.tvLevel.text = "Level: ${data?.user?.level?.toString() ?: "0"}"
+                    binding.experience.text = "Exp: ${data?.user?.totalExp?.toString() ?: "0"}"
 
                     Log.d("ProfileFragment", "fetchProfile: ${data?.stats}")
                     binding.tvTotalQuiz.text = (data?.stats?.quizDone ?: 0).toString()
