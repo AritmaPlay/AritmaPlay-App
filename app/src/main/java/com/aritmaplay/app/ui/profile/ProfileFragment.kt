@@ -8,11 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.datastore.dataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.aritmaplay.app.MainViewModel
 import com.aritmaplay.app.R
 import com.aritmaplay.app.ViewModelFactory
 import com.aritmaplay.app.data.Result
@@ -27,9 +25,7 @@ class ProfileFragment : Fragment() {
     private val viewModel: ProfileViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireContext())
     }
-
     private var _binding: FragmentProfileBinding? = null
-
     private val binding get() = _binding!!
 
     private lateinit var userPreference: UserPreference
@@ -71,14 +67,15 @@ class ProfileFragment : Fragment() {
             when (result) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
+                    binding.tvUserName.visibility = View.INVISIBLE
                 }
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     val data = result.data.data
+                    binding.tvUserName.visibility = View.VISIBLE
                     binding.tvUserName.text = data?.user?.username ?: "Unknown"
                     binding.tvLevel.text = "Level: ${data?.user?.level?.toString() ?: "0"}"
                     binding.experience.text = "Exp: ${data?.user?.totalExp?.toString() ?: "0"}"
-
                     Log.d("ProfileFragment", "fetchProfile: ${data?.stats}")
                     binding.tvTotalQuiz.text = (data?.stats?.quizDone ?: 0).toString()
                     binding.tvSumRate.text = (data?.stats?.quizPenjumlahanSuccessRate ?: 0).toString() + "%"
@@ -100,7 +97,7 @@ class ProfileFragment : Fragment() {
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(context, "Error: ${result.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Error Loading Data", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -224,7 +224,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -272,8 +271,6 @@
                 app:layout_constraintTop_toTopOf="@+id/tvWelcome"
                 app:layout_constraintVertical_bias="0.312"
                 app:srcCompat="@drawable/baseline_history_36" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
@@ -299,6 +296,33 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateTint="@color/blue_900"
+                    android:visibility="gone"
+                    android:elevation="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/tvNoData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:overScrollMode="never"
+                    android:text="@string/noData"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/ivPeringkat"

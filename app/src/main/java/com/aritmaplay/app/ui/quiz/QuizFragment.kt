@@ -77,10 +77,12 @@ class QuizFragment : Fragment() {
             when (state) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar2.visibility = View.VISIBLE
                     Log.d("HandwritingPredict", "Predicting...")
                 }
 
                 is Result.Success -> {
+                    binding.progressBar2.visibility = View.GONE
                     val predictedAnswer = state.data.data.digit
                     val correctAnswer = viewModel.currentQuestion.value?.correctAnswer
                     Log.d("HandwritingPredict", "Predict: ${state.data.data}")
@@ -118,7 +120,8 @@ class QuizFragment : Fragment() {
 
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    binding.progressBar2.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Error Loading Data", Toast.LENGTH_SHORT).show()
                     Log.e("HandwritingPredict", "Error: ${state.message}")
                 }
             }
