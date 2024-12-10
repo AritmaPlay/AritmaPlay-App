@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import com.aritmaplay.app.R
 import com.aritmaplay.app.ViewModelFactory
@@ -96,6 +97,7 @@ class SignUpActivity : AppCompatActivity() {
         }.start()
     }
 
+
     private fun setupAction() {
         binding.signupButton.setOnClickListener {
             val name = binding.edSignupName.text.toString()
@@ -121,14 +123,8 @@ class SignUpActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
-            viewModel.register(userName, name, email, password)
-        }
-    }
 
-    private fun setupSystemBar() {
-        WindowCompat.getInsetsController(window, window.decorView).apply {
-            isAppearanceLightNavigationBars = true
-            isAppearanceLightStatusBars = true
+            viewModel.register(userName, name, email, password)
         }
     }
 
@@ -149,5 +145,13 @@ class SignUpActivity : AppCompatActivity() {
     private fun goToLoginActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    private fun setupSystemBar() {
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightNavigationBars = true
+            isAppearanceLightStatusBars = true
+            window.statusBarColor = ContextCompat.getColor(this@SignUpActivity, R.color.gray)
+        }
     }
 }

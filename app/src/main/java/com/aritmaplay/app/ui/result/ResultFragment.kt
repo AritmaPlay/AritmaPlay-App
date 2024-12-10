@@ -1,6 +1,7 @@
 package com.aritmaplay.app.ui.result
 
 import android.animation.ObjectAnimator
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,6 +36,8 @@ class ResultFragment : Fragment() {
 
     private val args: ResultFragmentArgs by navArgs()
 
+    private lateinit var finishSound: MediaPlayer
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,6 +56,7 @@ class ResultFragment : Fragment() {
         val duration = args.duration
 
         playAnimation()
+        finishSound = MediaPlayer.create(context, R.raw.sound_finish)
 
         binding.tvExpNumber.text = totalExp.toString()
         binding.tvAccuraccyNumber.text = buildString {
@@ -88,7 +92,7 @@ class ResultFragment : Fragment() {
             userPreference.getSession().collect { user ->
                 if (user.isLogin) {
                     viewModel.generateMotivation(user.name, correctAnswerCount, duration, 10, operation)
-                    viewModel.result(user.token, operation, 10, duration, correctAnswerCount)
+                    viewModel.result(user.token, operation, 10, duration, correctAnswerCount, user.userId)
                 }
             }
         }
@@ -122,6 +126,7 @@ class ResultFragment : Fragment() {
                     binding.progressBarResult.visibility = View.GONE
                     binding.constraintLayoutResult.visibility = View.VISIBLE
                     binding.konfettiView.start(explode())
+                    finishSound.start()
                 }
 
                 is Result.Error -> {
@@ -143,7 +148,12 @@ class ResultFragment : Fragment() {
 
         binding.goButton.setOnClickListener {
             val directToQuiz = ResultFragmentDirections.actionResultFragmentToQuizFragment(operation)
-            findNavController().navigate(directToQuiz)
+            findNavController().navigate(
+                directToQuiz,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.resultFragment, true)
+                    .build()
+            )
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.getInsetsController(window, window.decorView).apply {
             isAppearanceLightNavigationBars = true
             isAppearanceLightStatusBars = true
+            window.statusBarColor = ContextCompat.getColor(this@MainActivity, R.color.yellow_300)
         }
     }
 }

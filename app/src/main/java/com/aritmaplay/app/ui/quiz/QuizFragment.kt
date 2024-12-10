@@ -34,6 +34,7 @@ class QuizFragment : Fragment() {
 
     private lateinit var correctSound: MediaPlayer
     private lateinit var wrongSound: MediaPlayer
+    private lateinit var quizSound: MediaPlayer
 
     val indicators = mapOf(
         1 to R.id.indicator1,
@@ -47,7 +48,6 @@ class QuizFragment : Fragment() {
         9 to R.id.indicator9,
         10 to R.id.indicator10
     )
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,6 +76,10 @@ class QuizFragment : Fragment() {
 
         correctSound = MediaPlayer.create(context, R.raw.sound_correct)
         wrongSound = MediaPlayer.create(context, R.raw.sound_wrong)
+        quizSound = MediaPlayer.create(context, R.raw.sound_quiz)
+
+        quizSound.isLooping = true
+        quizSound.start()
     }
 
     override fun onCreateView(
@@ -105,9 +109,11 @@ class QuizFragment : Fragment() {
                     val predictedAnswer = state.data.data.digit
                     val correctAnswer = viewModel.currentQuestion.value?.correctAnswer
                     Log.d("HandwritingPredict", "Predict: ${state.data.data}")
+
                     if (correctAnswer != null) {
                         quizReview(predictedAnswer, correctAnswer)
                     }
+
                 }
 
                 is Result.Error -> {
@@ -139,7 +145,7 @@ class QuizFragment : Fragment() {
     private fun quizReview(predictedAnswer: Int, correctAnswer: Int) {
         if (predictedAnswer == correctAnswer) {
             indicators[currentQuestion]?.let { binding.root.findViewById<View>(it).setBackgroundResource(R.drawable.indicator_correct) }
-            correctSound.start()
+            playCorrectSound()
             viewModel.incrementCorrectAnswer()
             binding.tvCorrectTitle.text = "Jawaban kamu benar!"
         } else {
@@ -190,9 +196,37 @@ class QuizFragment : Fragment() {
         binding.linearLayoutBottom.visibility = View.VISIBLE
     }
 
+    private fun playCorrectSound() {
+        if (correctSound.isPlaying) {
+            correctSound.stop()
+            correctSound.reset()
+            correctSound = MediaPlayer.create(context, R.raw.sound_correct)
+        }
+        correctSound.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (quizSound.isPlaying) {
+            quizSound.pause()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        quizSound.start()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        quizSound.let {
+            if (it.isPlaying) {
+                it.stop()
+            }
+            it.release()
+        }
+        correctSound.release()
+        wrongSound.release()
         _binding = null
     }
 }
