@@ -74,6 +74,7 @@
     <string name="multiply_title">Perkalian</string>
     <string name="multiply_rate">75%</string>
     <string name="divide_title">Pembagian</string>
+    <string name="akurasi_title">Akurasi</string>
     <string name="divide_rate">62%</string>
     <string name="logout">Keluar</string>
     <string name="badge_exp">badge exp</string>
