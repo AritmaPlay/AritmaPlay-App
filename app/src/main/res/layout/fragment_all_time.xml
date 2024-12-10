@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/my_rank"
-                android:textAppearance="@style/TextContent.Heading.Bold" />
+                android:textAppearance="@style/TextContent.SubHeading.Bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayoutMyRank"
@@ -107,7 +107,7 @@
                 android:layout_marginTop="8dp"
                 android:padding="16dp"
                 android:text="@string/all_rank"
-                android:textAppearance="@style/TextContent.Heading.Bold" />
+                android:textAppearance="@style/TextContent.SubHeading.Bold" />
 
             <TextView
                 android:id="@+id/tvNoData"
