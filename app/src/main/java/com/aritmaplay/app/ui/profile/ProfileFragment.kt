@@ -41,12 +41,12 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userPreference = UserPreference.getInstance(requireContext().dataStore)
+        userPreference = UserPreference.getInstance(requireContext().dataStore)
 
         lifecycleScope.launch {
             userPreference.getSession().collect { user ->
                 if (user.isLogin) {
-                    fetchProfile(user.token, user.userId) // Assuming userId is in token
+                    fetchProfile(user.token, user.userId)
                 } else {
                     Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT).show()
                 }
@@ -75,18 +75,25 @@ class ProfileFragment : Fragment() {
                     binding.tvUserName.visibility = View.VISIBLE
                     binding.tvUserName.text = data?.user?.username ?: "Unknown"
                     binding.tvLevel.text = "Level: ${data?.user?.level?.toString() ?: "0"}"
+                    binding.tvTotalQuiz.text = "Kuis Selesai: ${data?.stats?.quizDone.toString() ?: "0"}"
                     binding.experience.text = "Exp: ${data?.user?.totalExp?.toString() ?: "0"}"
                     Log.d("ProfileFragment", "fetchProfile: ${data?.stats}")
-                    binding.tvTotalQuiz.text = (data?.stats?.quizDone ?: 0).toString()
-                    binding.tvSumRate.text = (data?.stats?.quizPenjumlahanSuccessRate ?: 0).toString() + "%"
-                    binding.tvSubtractRate.text = (data?.stats?.quizPenguranganSuccessRate ?: 0).toString() + "%"
-                    binding.multiplyRate.text = (data?.stats?.quizPerkalianSuccessRate ?: 0).toString() + "%"
-                    binding.tvDivideRate.text = (data?.stats?.quizPembagianSuccessRate ?: 0).toString() + "%"
 
-                    binding.tvSuccessRate.text = (((data?.stats?.quizPenjumlahanSuccessRate ?: 0) +
-                            (data?.stats?.quizPenguranganSuccessRate ?: 0) +
-                            (data?.stats?.quizPerkalianSuccessRate ?: 0) +
-                            (data?.stats?.quizPembagianSuccessRate ?: 0)) / 4).toString() + "%"
+                    val sumRate = data?.stats?.quizPenjumlahanSuccessRate ?: 0
+                    binding.tvSumRate.text = "$sumRate%"
+                    binding.progressBarSum.progress = sumRate
+
+                    val subtractRate = data?.stats?.quizPenguranganSuccessRate ?: 0
+                    binding.tvSubtractRate.text = "$subtractRate%"
+                    binding.progressBarSubtract.progress = subtractRate
+
+                    val multiplyRate = data?.stats?.quizPerkalianSuccessRate ?: 0
+                    binding.multiplyRate.text = "$multiplyRate%"
+                    binding.progressBarMultiply.progress = multiplyRate
+
+                    val divideRate = data?.stats?.quizPembagianSuccessRate ?: 0
+                    binding.tvDivideRate.text = "$divideRate%"
+                    binding.progressBarDivide.progress = divideRate
 
                     Glide.with(requireContext())
                         .load(data?.user?.urlProfile)

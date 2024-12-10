@@ -52,19 +52,18 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/profileImageView"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        android:layout_marginTop="24dp"
                         android:background="@drawable/bg_circle"
+                        android:layout_marginTop="16dp"
                         android:contentDescription="@string/profile_image"
                         android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -81,193 +80,373 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/profileImageView" />
 
-                    <TextView
-                        android:id="@+id/tvStatisticsTitle"
-                        style="@style/TextContent.Heading.Bold"
-                        android:layout_marginTop="32dp"
-                        android:padding="8dp"
-                        android:text="@string/statictics_title"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvUserName" />
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/statisticsCardView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="4dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvStatisticsTitle">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <ImageView
-                                    android:id="@+id/ivExp"
-                                    android:layout_width="48dp"
-                                    android:layout_height="48dp"
-                                    android:contentDescription="@string/badge_exp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/exp_icon" />
-
-                                <TextView
-                                    android:id="@+id/tvLevel"
-                                    style="@style/TextContent.SubHeading.Bold"
-                                    android:layout_marginStart="16dp"
-                                    android:text="@string/level"
-                                    app:layout_constraintStart_toEndOf="@+id/ivExp"
-                                    app:layout_constraintTop_toTopOf="@+id/ivExp" />
-
-                                <TextView
-                                    android:id="@+id/experience"
-                                    style="@style/TextContent.Caption"
-                                    android:layout_marginStart="16dp"
-                                    android:text="@string/exp"
-                                    app:layout_constraintStart_toEndOf="@+id/ivExp"
-                                    app:layout_constraintTop_toBottomOf="@id/tvLevel" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <FrameLayout
-                                android:id="@+id/frameStatistics"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:background="@drawable/bg_full_rounded_blue">
-
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="16dp">
-
-                                    <TextView
-                                        android:id="@+id/tvCorrectAnswer"
-                                        style="@style/TextContent.Body"
-                                        android:text="@string/total_quiz_title"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
-
-                                    <TextView
-                                        android:id="@+id/tvTotalQuiz"
-                                        style="@style/TextContent.Body.Bold"
-                                        android:text="@string/total_quiz"
-                                        app:layout_constraintBottom_toBottomOf="@+id/tvCorrectAnswer"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintTop_toTopOf="@id/tvCorrectAnswer" />
-
-
-                                    <TextView
-                                        android:id="@+id/tvSuccessRateTitle"
-                                        style="@style/TextContent.Body"
-                                        android:layout_marginTop="8dp"
-                                        android:text="@string/success_rate_title"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/tvTotalQuiz" />
-
-                                    <TextView
-                                        android:id="@+id/tvSuccessRate"
-                                        style="@style/TextContent.Body.Bold"
-                                        android:text="@string/success_rate"
-                                        app:layout_constraintBottom_toBottomOf="@+id/tvSuccessRateTitle"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintTop_toTopOf="@+id/tvSuccessRateTitle" />
-
-                                    <TextView
-                                        android:id="@+id/tvSumTitle"
-                                        style="@style/TextContent.Caption"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="@string/sum_title"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/tvSuccessRateTitle" />
-
-                                    <TextView
-                                        android:id="@+id/tvSumRate"
-                                        style="@style/TextContent.Caption.Bold"
-                                        android:layout_marginTop="8dp"
-                                        android:text="@string/sum_rate"
-                                        app:layout_constraintBottom_toBottomOf="@+id/tvSumTitle"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintTop_toTopOf="@+id/tvSumTitle" />
-
-                                    <TextView
-                                        android:id="@+id/tvSubtractTitle"
-                                        style="@style/TextContent.Caption"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="@string/subtract_title"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/tvSumTitle" />
-
-                                    <TextView
-                                        android:id="@+id/tvSubtractRate"
-                                        style="@style/TextContent.Caption.Bold"
-                                        android:text="@string/subtract_rate"
-                                        app:layout_constraintBottom_toBottomOf="@+id/tvSubtractTitle"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintTop_toTopOf="@+id/tvSubtractTitle" />
-
-                                    <TextView
-                                        android:id="@+id/tvMultiplyTitle"
-                                        style="@style/TextContent.Caption"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="@string/multiply_title"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/tvSubtractTitle" />
-
-                                    <TextView
-                                        android:id="@+id/multiply_rate"
-                                        style="@style/TextContent.Caption.Bold"
-                                        android:text="@string/multiply_rate"
-                                        app:layout_constraintBottom_toBottomOf="@+id/tvMultiplyTitle"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintTop_toTopOf="@+id/tvMultiplyTitle" />
-
-                                    <TextView
-                                        android:id="@+id/tvDivideTitle"
-                                        style="@style/TextContent.Caption"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="@string/divide_title"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toBottomOf="@+id/tvMultiplyTitle" />
-
-                                    <TextView
-                                        android:id="@+id/tvDivideRate"
-                                        style="@style/TextContent.Caption.Bold"
-                                        android:text="@string/divide_rate"
-                                        app:layout_constraintBottom_toBottomOf="@+id/tvDivideTitle"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintTop_toTopOf="@+id/tvDivideTitle" />
-
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-                            </FrameLayout>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <Button
-                        android:id="@+id/logout_button"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ConsLevel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="48dp"
-                        android:layout_marginBottom="92dp"
-                        app:backgroundTint="@null"
-                        android:background="@drawable/bg_button_secondary"
-                        android:text="@string/logout"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/bg_full_rounded_white"
+                        android:elevation="4dp"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toTopOf="@+id/tvAkurasiTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/tvUserName"
+                        tools:layout_editor_absoluteX="16dp">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutLevel"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_marginStart="4dp"
+                            android:background="@drawable/bg_full_rounded_white"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivExp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:contentDescription="@string/badge_exp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/exp_icon" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvLevel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/level"
+                            android:textAppearance="@style/TextContent.Body.Bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/linearLayoutLevel"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvTotalQuiz"
+                            style="@style/TextContent.Body.Bold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:text="@string/total_quiz"
+                            android:textAppearance="@style/TextContent.Body.Bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/linearLayoutLevel"
+                            app:layout_constraintTop_toBottomOf="@+id/tvLevel" />
+
+                        <TextView
+                            android:id="@+id/experience"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:text="@string/exp"
+                            android:textAppearance="@style/TextContent.Body.Bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/linearLayoutLevel"
+                            app:layout_constraintTop_toBottomOf="@id/tvTotalQuiz" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ConsSum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_full_rounded_white"
+                        android:elevation="4dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/tvAkurasiTitle"
+                        tools:layout_editor_absoluteX="16dp">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutSum"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_full_rounded_gray"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivSumProfile"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:srcCompat="@drawable/add_icon" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvSumTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/sum_title"
+                            android:textAppearance="@style/TextContent.Body.Bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/linearLayoutSum"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvSumRate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:text="@string/sum_rate"
+                            android:textAppearance="@style/TextContent.Caption"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/linearLayoutSum"
+                            app:layout_constraintTop_toBottomOf="@id/tvSumTitle" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBarSum"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:max="100"
+                            android:progressTint="@color/blue_800"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayoutSum"
+                            app:layout_constraintTop_toBottomOf="@+id/tvSumRate" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ConsSubtract"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/bg_full_rounded_white"
+                        android:elevation="4dp"
+                        android:padding="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/ConsSum"
+                        tools:layout_editor_absoluteX="16dp">
+
+                        <LinearLayout
+                            android:id="@+id/LinearLayoutSubtract"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_full_rounded_gray"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivSubtractProfile"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:srcCompat="@drawable/subtract_icon" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvSubtractTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/subtract_title"
+                            android:textAppearance="@style/TextContent.Body.Bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/LinearLayoutSubtract"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvSubtractRate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:text="@string/subtract_rate"
+                            android:textAppearance="@style/TextContent.Caption"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/LinearLayoutSubtract"
+                            app:layout_constraintTop_toBottomOf="@id/tvSubtractTitle" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBarSubtract"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:max="100"
+                            android:progressTint="@color/blue_800"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/LinearLayoutSubtract"
+                            app:layout_constraintTop_toBottomOf="@+id/tvSubtractRate" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ConsMultiply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_full_rounded_white"
+                    android:elevation="4dp"
+                    android:padding="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/ConsSubtract"
+                    tools:layout_editor_absoluteX="16dp">
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutMultiply"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_full_rounded_gray"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivMultiplyProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/multiply_icon" />
+
+                </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvMultiplyTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/multiply_title"
+                        android:textAppearance="@style/TextContent.Body.Bold"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/statisticsCardView" />
+                        app:layout_constraintStart_toEndOf="@id/linearLayoutMultiply"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/multiply_rate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11dp"
+                        android:text="@string/multiply_rate"
+                        android:textAppearance="@style/TextContent.Caption"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/linearLayoutMultiply"
+                        app:layout_constraintTop_toBottomOf="@id/tvMultiplyTitle" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarMultiply"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:max="100"
+                        android:progressTint="@color/blue_800"
+                        app:layout_constraintStart_toEndOf="@+id/linearLayoutMultiply"
+                        app:layout_constraintTop_toBottomOf="@+id/multiply_rate" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ConsDivide"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_full_rounded_white"
+                        android:elevation="4dp"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ConsMultiply">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayoutDivide"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_full_rounded_gray"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivDivideProfile"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:srcCompat="@drawable/divine_icon" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvDivideTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/divide_title"
+                            android:textAppearance="@style/TextContent.Body.Bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/linearLayoutDivide"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvDivideRate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:text="@string/divide_rate"
+                            android:textAppearance="@style/TextContent.Caption"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/linearLayoutDivide"
+                            app:layout_constraintTop_toBottomOf="@id/tvDivideTitle" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBarDivide"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:max="100"
+                            android:progressTint="@color/blue_800"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayoutDivide"
+                            app:layout_constraintTop_toBottomOf="@+id/tvDivideRate" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvAkurasiTitle"
+                        style="@style/TextContent.Heading.Bold"
+                        android:padding="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="@string/akurasi_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ConsLevel" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </FrameLayout>
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp"
+                app:backgroundTint="@null"
+                android:background="@drawable/bg_button_secondary"
+                android:text="@string/logout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frameProfil" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
