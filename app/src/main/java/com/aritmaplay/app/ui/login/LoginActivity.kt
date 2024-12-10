@@ -4,18 +4,17 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import com.aritmaplay.app.MainActivity
+import com.aritmaplay.app.R
 import com.aritmaplay.app.ViewModelFactory
 import com.aritmaplay.app.data.Result
 import com.aritmaplay.app.data.local.pref.UserModel
@@ -96,7 +95,6 @@ class LoginActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.VISIBLE
                     Log.d("LoginActivity", "Logging in...")
                 }
-
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     lifecycleScope.launch {
@@ -122,10 +120,7 @@ class LoginActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginActivity, "Data login tidak valid", Toast.LENGTH_SHORT).show()
                         }
                     }
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
                 }
-
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
@@ -134,6 +129,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun setupAction() {
         binding.loginButton.setOnClickListener {
@@ -153,15 +149,16 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun goToSignUpActivity() {
+        startActivity(Intent(this, SignUpActivity::class.java))
+        finish()
+    }
+
     private fun setupSystemBar() {
         WindowCompat.getInsetsController(window, window.decorView).apply {
             isAppearanceLightNavigationBars = true
             isAppearanceLightStatusBars = true
+            window.statusBarColor = ContextCompat.getColor(this@LoginActivity, R.color.gray)
         }
-    }
-
-    private fun goToSignUpActivity() {
-        startActivity(Intent(this, SignUpActivity::class.java))
-        finish()
     }
 }
