@@ -10,8 +10,8 @@ class ResultRepository private constructor(
     private val profileApiService: ProfileApiService,
     private val vertexAIApiService: VertexAIApiService,
 ){
-    suspend fun result(token: String, quizMode: String, totalQuestion: Int, quizTime: Int, correctQuestion: Int): ResultResponse {
-        return profileApiService.result(token, quizMode, totalQuestion, quizTime, correctQuestion)
+    suspend fun result(token: String, quizMode: String, totalQuestion: Int, quizTime: Int, correctQuestion: Int, userId: Int): ResultResponse {
+        return profileApiService.result(token, quizMode, totalQuestion, quizTime, correctQuestion, userId)
     }
 
     suspend fun generateMotivation(name: String, correctQuestion: Int, time: Int, totalQuestion: Int, mode: String): VertexAIGenerateMotivationResponse {

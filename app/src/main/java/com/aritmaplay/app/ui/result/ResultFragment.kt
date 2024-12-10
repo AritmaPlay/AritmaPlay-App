@@ -88,7 +88,7 @@ class ResultFragment : Fragment() {
             userPreference.getSession().collect { user ->
                 if (user.isLogin) {
                     viewModel.generateMotivation(user.name, correctAnswerCount, duration, 10, operation)
-                    viewModel.result(user.token, operation, 10, duration, correctAnswerCount)
+                    viewModel.result(user.token, operation, 10, duration, correctAnswerCount, user.userId)
                 }
             }
         }

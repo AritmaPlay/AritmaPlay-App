@@ -15,11 +15,11 @@ class ResultViewModel(private val resultRepository: ResultRepository) : ViewMode
     private val _quizResult = MutableLiveData<Result<ResultResponse>>()
     val quizResult: LiveData<Result<ResultResponse>> = _quizResult
 
-    fun result(token: String, quizMode: String, totalQuestion: Int, quizTime: Int, correctQuestion: Int) {
+    fun result(token: String, quizMode: String, totalQuestion: Int, quizTime: Int, correctQuestion: Int, userId: Int) {
         viewModelScope.launch {
             _quizResult.value = Result.Loading
             try {
-                val response = resultRepository.result(token, quizMode, totalQuestion, quizTime, correctQuestion)
+                val response = resultRepository.result(token, quizMode, totalQuestion, quizTime, correctQuestion, userId)
                 _quizResult.value = Result.Success(response)
             } catch (e: Exception) {
                 _quizResult.value = Result.Error(e.toString())

@@ -44,5 +44,6 @@ interface ProfileApiService {
         @Field("total_question") totalQuestion: Int,
         @Field("quiz_time") quizTime: Int,
         @Field("correct_question") correctQuestion: Int,
+        @Field("user_id") userId: Int
     ): ResultResponse
 }
