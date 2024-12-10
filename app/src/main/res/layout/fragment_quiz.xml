@@ -49,34 +49,128 @@
             android:layout_height="wrap_content"
             android:padding="16dp">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:layout_marginBottom="8dp"
-                android:max="100"
-                android:progress="0"
-                android:progressBackgroundTint="@color/white"
-                android:progressTint="@color/blue_800"
+            <LinearLayout
+                android:id="@+id/indicator1"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_active"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/indicator2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/indicator2"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_default"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator1"
+                app:layout_constraintEnd_toStartOf="@+id/indicator3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator1"
+                app:layout_constraintTop_toTopOf="@+id/indicator1" />
+
+            <LinearLayout
+                android:id="@+id/indicator3"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_default"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator2"
+                app:layout_constraintEnd_toStartOf="@+id/indicator4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator2"
+                app:layout_constraintTop_toTopOf="@+id/indicator2" />
+
+            <LinearLayout
+                android:id="@+id/indicator4"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_default"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator3"
+                app:layout_constraintEnd_toStartOf="@+id/indicator5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator3"
+                app:layout_constraintTop_toTopOf="@+id/indicator3" />
+
+            <LinearLayout
+                android:id="@+id/indicator5"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_default"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator4"
+                app:layout_constraintEnd_toStartOf="@+id/indicator6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator4"
+                app:layout_constraintTop_toTopOf="@+id/indicator4" />
+
+            <LinearLayout
+                android:id="@+id/indicator6"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_default"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator5"
+                app:layout_constraintEnd_toStartOf="@+id/indicator7"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator5"
+                app:layout_constraintTop_toTopOf="@+id/indicator5" />
+
+            <LinearLayout
+                android:id="@+id/indicator7"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_default"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator6"
+                app:layout_constraintEnd_toStartOf="@+id/indicator8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator6"
+                app:layout_constraintTop_toTopOf="@+id/indicator6" />
+
+            <LinearLayout
+                android:id="@+id/indicator8"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_default"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator7"
+                app:layout_constraintEnd_toStartOf="@+id/indicator9"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator7"
+                app:layout_constraintTop_toTopOf="@+id/indicator7" />
+
+            <LinearLayout
+                android:id="@+id/indicator9"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_default"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator8"
+                app:layout_constraintEnd_toStartOf="@+id/indicator10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator8"
+                app:layout_constraintTop_toTopOf="@+id/indicator8" />
+
+            <LinearLayout
+                android:id="@+id/indicator10"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/indicator_default"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/indicator9"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/tvProgress"
-                style="@style/TextContent.Caption.Bold"
-                android:text="@string/quiz_now"
-                app:layout_constraintTop_toBottomOf="@id/progressBar"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/tvProgressTotal"
-                style="@style/TextContent.Caption"
-                android:text="@string/total_quiz_progress"
-                app:layout_constraintTop_toBottomOf="@id/progressBar"
-                app:layout_constraintStart_toEndOf="@+id/tvProgress" />
-
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator9"
+                app:layout_constraintTop_toTopOf="@+id/indicator9" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

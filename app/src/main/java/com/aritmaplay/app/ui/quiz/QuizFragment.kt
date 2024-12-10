@@ -35,6 +35,20 @@ class QuizFragment : Fragment() {
     private lateinit var correctSound: MediaPlayer
     private lateinit var wrongSound: MediaPlayer
 
+    val indicators = mapOf(
+        1 to R.id.indicator1,
+        2 to R.id.indicator2,
+        3 to R.id.indicator3,
+        4 to R.id.indicator4,
+        5 to R.id.indicator5,
+        6 to R.id.indicator6,
+        7 to R.id.indicator7,
+        8 to R.id.indicator8,
+        9 to R.id.indicator9,
+        10 to R.id.indicator10
+    )
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -80,7 +94,6 @@ class QuizFragment : Fragment() {
         viewModel.predictResult.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
                     binding.progressBar2.visibility = View.VISIBLE
                     Log.d("HandwritingPredict", "Predicting...")
                 }
@@ -96,7 +109,6 @@ class QuizFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
                     binding.progressBar2.visibility = View.GONE
                     Toast.makeText(requireContext(), "Error Loading Data", Toast.LENGTH_SHORT).show()
                     Log.e("HandwritingPredict", "Error: ${state.message}")
@@ -105,11 +117,6 @@ class QuizFragment : Fragment() {
         }
     }
 
-    private fun updateProgress() {
-        val progressPercentage = (currentQuestion * 100) / 10
-        binding.progressBar.progress = progressPercentage
-        binding.tvProgress.text = currentQuestion.toString()
-    }
     private fun initDrawView() {
         binding.drawView.apply {
             brushSize = 55f
@@ -129,10 +136,12 @@ class QuizFragment : Fragment() {
 
     private fun quizReview(predictedAnswer: Int, correctAnswer: Int) {
         if (predictedAnswer == correctAnswer) {
+            indicators[currentQuestion]?.let { binding.root.findViewById<View>(it).setBackgroundResource(R.drawable.indicator_correct) }
             correctSound.start()
             viewModel.incrementCorrectAnswer()
             binding.tvCorrectTitle.text = "Jawaban kamu benar!"
         } else {
+            indicators[currentQuestion]?.let { binding.root.findViewById<View>(it).setBackgroundResource(R.drawable.indicator_wrong) }
             wrongSound.start()
             binding.tvCorrectTitle.text = "Jawabanmu $predictedAnswer, kurang tepat!"
             binding.tvCorrectAnswer.text = "Jawaban yang benar adalah $correctAnswer"
@@ -140,15 +149,15 @@ class QuizFragment : Fragment() {
         }
 
         currentQuestion++
-        updateProgress()
 
         binding.btNextQuiz.setOnClickListener {
             binding.tvCorrectAnswer.visibility = View.INVISIBLE
             binding.linearLayoutBottom.visibility = View.GONE
             binding.drawView.clearCanvas(needsSaving = false)
             isCanvasEmpty = true
+            indicators[currentQuestion]?.let { binding.root.findViewById<View>(it).setBackgroundResource(R.drawable.indicator_active) }
 
-            if (currentQuestion < 10) {
+            if (currentQuestion <= 10) {
                 viewModel.generateNewQuestion(operation = args.operation)
             } else {
                 val endTime = System.currentTimeMillis()
