@@ -9,8 +9,10 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.aritmaplay.app.R
 import com.aritmaplay.app.ViewModelFactory
@@ -75,19 +77,22 @@ class HomeFragment : Fragment() {
 
         val userPreference = UserPreference.getInstance(requireContext().dataStore)
 
-        lifecycleScope.launch {
-            userPreference.getSession().collect { user ->
-                if (user.isLogin) {
-                    val index = user.name.indexOf(' ')
-                    if (index == -1) {
-                        binding.tvWelcome.text = "Selamat Datang, ${user.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }}!"
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                userPreference.getSession().collect { user ->
+                    if (user.isLogin) {
+                        val index = user.name.indexOf(' ')
+                        if (index == -1) {
+                            binding.tvWelcome.text = "Selamat Datang, ${user.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }}!"
+                        } else {
+                            val firstName = index.let { user.name.substring(0, it) }.toString().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+                            binding.tvWelcome.text = "Selamat Datang, $firstName!"
+                        }
+                        fetchProfile(user.token, user.userId)
                     } else {
-                        val firstName = index.let { user.name.substring(0, it) }.toString().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
-                        binding.tvWelcome.text = "Selamat Datang, $firstName!"
+                        Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT)
+                            .show()
                     }
-                    fetchProfile(user.token, user.userId)
-                } else {
-                    Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT).show()
                 }
             }
         }
