@@ -96,6 +96,8 @@ class QuizFragment : Fragment() {
                 is Result.Loading -> {
                     binding.progressBar2.visibility = View.VISIBLE
                     Log.d("HandwritingPredict", "Predicting...")
+                    binding.sendButton.isEnabled = false
+                    binding.deleteButton.isEnabled = false
                 }
 
                 is Result.Success -> {
@@ -156,6 +158,9 @@ class QuizFragment : Fragment() {
             binding.drawView.clearCanvas(needsSaving = false)
             isCanvasEmpty = true
             indicators[currentQuestion]?.let { binding.root.findViewById<View>(it).setBackgroundResource(R.drawable.indicator_active) }
+
+            binding.sendButton.isEnabled = true
+            binding.deleteButton.isEnabled = true
 
             if (currentQuestion <= 10) {
                 viewModel.generateNewQuestion(operation = args.operation)
