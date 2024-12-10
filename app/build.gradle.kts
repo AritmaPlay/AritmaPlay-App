@@ -76,4 +76,7 @@ dependencies {
 
     //Pager
     implementation(libs.androidx.viewpager2)
+
+    //Konfetti
+    implementation(libs.dionsegijn.konfetti.xml)
 }
