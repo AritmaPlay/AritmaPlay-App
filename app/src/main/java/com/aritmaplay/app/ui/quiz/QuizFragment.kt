@@ -56,15 +56,12 @@ class QuizFragment : Fragment() {
             } else {
                 val bitmap = binding.drawView.saveAsBitmap()
                 viewModel.predict(bitmap, requireContext())
-                binding.drawView.clearCanvas(needsSaving = false)
-                isCanvasEmpty = true
             }
         }
 
         binding.deleteButton.setOnClickListener {
             binding.drawView.clearCanvas(needsSaving = false)
             isCanvasEmpty = true
-            Toast.makeText(requireContext(), "Canvas cleared!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -73,7 +70,7 @@ class QuizFragment : Fragment() {
         viewModel.currentQuestion.observe(viewLifecycleOwner) { quizModel ->
             binding.tvQuestion.text = quizModel.question
         }
-        viewModel.predictResult.observe(requireActivity()) { state ->
+        viewModel.predictResult.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -86,35 +83,8 @@ class QuizFragment : Fragment() {
                     val predictedAnswer = state.data.data.digit
                     val correctAnswer = viewModel.currentQuestion.value?.correctAnswer
                     Log.d("HandwritingPredict", "Predict: ${state.data.data}")
-                    if (predictedAnswer == correctAnswer) {
-                        val incrementCorrectAnswer = viewModel.incrementCorrectAnswer()
-                        Toast.makeText(requireContext(), "Jawaban benar! Total benar: $incrementCorrectAnswer", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(requireContext(), "Jawaban salah!", Toast.LENGTH_SHORT).show()
-                    }
-                    if (currentQuestion < 10) {
-                        currentQuestion++
-                        updateProgress()
-                        viewModel.generateNewQuestion(operation = args.operation)
-                    } else {
-                        Toast.makeText(requireContext(), "Semua pertanyaan selesai!", Toast.LENGTH_SHORT).show()
-                        val endTime = System.currentTimeMillis()
-                        val duration = viewModel.getDuration(startTime, endTime)
-                        val correctAnswerCount = viewModel.getCorrectAnswer()
-                        viewModel.resetCorrectAnswer()
-                        Toast.makeText(requireContext(), "Lama pengerjaan anda: $duration", Toast.LENGTH_SHORT).show()
-                        Log.d("QuizDuration", "Lama pengerjaan anda: $duration")
-                        val directToResult = QuizFragmentDirections.actionQuizFragmentToResultFragment(
-                            args.operation,
-                            correctAnswerCount,
-                            duration
-                        )
-                        findNavController().navigate(
-                            directToResult,
-                            NavOptions.Builder()
-                                .setPopUpTo(R.id.quizFragment, true)
-                                .build()
-                        )
+                    if (correctAnswer != null) {
+                        quizReview(predictedAnswer, correctAnswer)
                     }
                 }
 
@@ -127,6 +97,7 @@ class QuizFragment : Fragment() {
             }
         }
     }
+
     private fun updateProgress() {
         val progressPercentage = (currentQuestion * 100) / 10
         binding.progressBar.progress = progressPercentage
@@ -148,6 +119,54 @@ class QuizFragment : Fragment() {
             }
         }
     }
+
+    private fun quizReview(predictedAnswer: Int, correctAnswer: Int) {
+        if (predictedAnswer == correctAnswer) {
+            viewModel.incrementCorrectAnswer()
+            binding.tvCorrectTitle.text = "Jawaban kamu benar!"
+        } else {
+            binding.tvCorrectTitle.text = "Jawabanmu $predictedAnswer, kurang tepat!"
+            binding.tvCorrectAnswer.text = "Jawaban yang benar adalah $correctAnswer"
+            binding.tvCorrectAnswer.visibility = View.VISIBLE
+        }
+
+        currentQuestion++
+        updateProgress()
+
+        binding.btNextQuiz.setOnClickListener {
+            binding.tvCorrectAnswer.visibility = View.INVISIBLE
+            binding.linearLayoutBottom.visibility = View.GONE
+            binding.drawView.clearCanvas(needsSaving = false)
+            isCanvasEmpty = true
+
+            if (currentQuestion < 10) {
+                viewModel.generateNewQuestion(operation = args.operation)
+            } else {
+                val endTime = System.currentTimeMillis()
+                val duration = viewModel.getDuration(startTime, endTime)
+                val correctAnswerCount = viewModel.getCorrectAnswer()
+                viewModel.resetCorrectAnswer()
+
+                Log.d("QuizDuration", "Lama pengerjaan anda: $duration")
+
+                val directToResult = QuizFragmentDirections.actionQuizFragmentToResultFragment(
+                    args.operation,
+                    correctAnswerCount,
+                    duration
+                )
+
+                findNavController().navigate(
+                    directToResult,
+                    NavOptions.Builder()
+                        .setPopUpTo(R.id.quizFragment, true)
+                        .build()
+                )
+            }
+        }
+
+        binding.linearLayoutBottom.visibility = View.VISIBLE
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
