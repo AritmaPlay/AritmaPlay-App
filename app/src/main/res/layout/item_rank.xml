@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
+    android:elevation="4dp"
     android:background="@drawable/bg_full_rounded_white">
 
     <LinearLayout
         android:id="@+id/linearLayoutIconRank"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/bg_full_rounded_gray"
         android:gravity="center"
