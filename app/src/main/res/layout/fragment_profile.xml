@@ -358,14 +358,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginBottom="8dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
                         android:background="@drawable/bg_full_rounded_white"
                         android:elevation="4dp"
                         android:padding="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/ConsMultiply"
-                        tools:layout_editor_absoluteX="16dp">
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ConsMultiply">
 
                         <LinearLayout
                             android:id="@+id/linearLayoutDivide"
@@ -414,9 +414,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
-                            app:layout_constraintEnd_toEndOf="parent"
                             android:max="100"
                             android:progressTint="@color/blue_800"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/linearLayoutDivide"
                             app:layout_constraintTop_toBottomOf="@+id/tvDivideRate" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
