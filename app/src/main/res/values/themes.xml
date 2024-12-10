@@ -28,19 +28,19 @@
     <style name="TextContent.LargeDisplay">
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
-        <item name="android:textSize">60sp</item>
+        <item name="android:textSize">24sp</item>
     </style>
     <style name="TextContent.LargeDisplay.Bold">
         <item name="android:textStyle">bold</item>
     </style>
     <style name="TextContent.Heading">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
     <style name="TextContent.Heading.Bold">
         <item name="android:textStyle">bold</item>
     </style>
     <style name="TextContent.SubHeading">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
     <style name="TextContent.SubHeading.Bold">
         <item name="android:textStyle">bold</item>

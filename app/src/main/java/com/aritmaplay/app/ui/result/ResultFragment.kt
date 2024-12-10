@@ -1,5 +1,6 @@
 package com.aritmaplay.app.ui.result
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -50,6 +51,8 @@ class ResultFragment : Fragment() {
         val correctAnswerCount = args.correctAnswerCount
         val totalExp = args.correctAnswerCount * 10
         val duration = args.duration
+
+        playAnimation()
 
         binding.tvExpNumber.text = totalExp.toString()
         binding.tvAccuraccyNumber.text = buildString {
@@ -156,6 +159,14 @@ class ResultFragment : Fragment() {
                 position = Position.Relative(0.5, 0.3)
             )
         )
+    }
+
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.ivResult, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 2000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
     }
 
     override fun onDestroyView() {
