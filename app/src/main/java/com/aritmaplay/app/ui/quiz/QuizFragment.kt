@@ -1,6 +1,7 @@
 package com.aritmaplay.app.ui.quiz
 
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,13 +32,8 @@ class QuizFragment : Fragment() {
 
     private var startTime: Long = 0L
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentQuizBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private lateinit var correctSound: MediaPlayer
+    private lateinit var wrongSound: MediaPlayer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,6 +59,17 @@ class QuizFragment : Fragment() {
             binding.drawView.clearCanvas(needsSaving = false)
             isCanvasEmpty = true
         }
+
+        correctSound = MediaPlayer.create(context, R.raw.sound_correct)
+        wrongSound = MediaPlayer.create(context, R.raw.sound_wrong)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentQuizBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     private fun observeViewModel() {
@@ -122,9 +129,11 @@ class QuizFragment : Fragment() {
 
     private fun quizReview(predictedAnswer: Int, correctAnswer: Int) {
         if (predictedAnswer == correctAnswer) {
+            correctSound.start()
             viewModel.incrementCorrectAnswer()
             binding.tvCorrectTitle.text = "Jawaban kamu benar!"
         } else {
+            wrongSound.start()
             binding.tvCorrectTitle.text = "Jawabanmu $predictedAnswer, kurang tepat!"
             binding.tvCorrectAnswer.text = "Jawaban yang benar adalah $correctAnswer"
             binding.tvCorrectAnswer.visibility = View.VISIBLE
