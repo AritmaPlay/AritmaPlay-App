@@ -14,7 +14,6 @@ interface VertexAIApiService {
     @FormUrlEncoded
     @POST("generate-motivation")
     suspend fun generate(
-        @Field("name") name: String,
         @Field("correct_answer") correctAnswer: Int,
         @Field("time") time: Int,
         @Field("total_question") totalQuestion: Int,

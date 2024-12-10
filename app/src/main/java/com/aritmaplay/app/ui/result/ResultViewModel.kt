@@ -34,7 +34,10 @@ class ResultViewModel(private val resultRepository: ResultRepository) : ViewMode
         viewModelScope.launch {
             _motivation.value = Result.Loading
             try {
-                val response = resultRepository.generateMotivation(name, correctQuestion, time, totalQuestion, mode)
+                val response = resultRepository.generateMotivation(correctQuestion, time, totalQuestion, mode)
+                val userName = name.replaceFirstChar { it.uppercaseChar() }
+                val replacedName = response.data?.replace("Aritma", userName)
+                response.data = replacedName
                 _motivation.value = Result.Success(response)
             } catch (e: Exception) {
                 _motivation.value = Result.Error(e.toString())

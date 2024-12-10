@@ -14,8 +14,8 @@ class ResultRepository private constructor(
         return profileApiService.result(token, quizMode, totalQuestion, quizTime, correctQuestion, userId)
     }
 
-    suspend fun generateMotivation(name: String, correctQuestion: Int, time: Int, totalQuestion: Int, mode: String): VertexAIGenerateMotivationResponse {
-        return vertexAIApiService.generate(name, correctQuestion, time, totalQuestion, mode)
+    suspend fun generateMotivation(correctQuestion: Int, time: Int, totalQuestion: Int, mode: String): VertexAIGenerateMotivationResponse {
+        return vertexAIApiService.generate(correctQuestion, time, totalQuestion, mode)
     }
 
     companion object {

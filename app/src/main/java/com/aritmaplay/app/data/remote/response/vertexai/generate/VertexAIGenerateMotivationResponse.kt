@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class VertexAIGenerateMotivationResponse(
     @field:SerializedName("data")
-    val `data`: String? = null,
+    var `data`: String? = null,
     @field:SerializedName("message")
     val message: String,
     @field:SerializedName("response_code")
