@@ -11,7 +11,6 @@
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="260dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,385 +18,395 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/welcome_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tvTitleArena"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/sub_title_arena"
-                android:textAppearance="@style/TextContent.SubHeading.Bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="32dp">
 
             <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="0dp"
-                android:layout_height="198dp"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleArena">
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_welcome"
+                    android:layout_width="match_parent"
+                    android:layout_height="196dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@color/yellow_300">
+
+                    <TextView
+                        android:id="@+id/tvWelcome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/welcome_greeting"
+                        android:textAppearance="@style/TextContent.Heading.Bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/sub_greeting"
+                        android:textAppearance="@style/TextContent.Body.Bold"
+                        android:textColor="@android:color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
+
+                    <ImageButton
+                        android:id="@+id/historyButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/yellow_300"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/tvWelcome"
+                        app:layout_constraintTop_toTopOf="@+id/tvWelcome"
+                        app:layout_constraintVertical_bias="0.312"
+                        app:srcCompat="@drawable/baseline_history_36" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="64dp"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                    <TextView
+                        android:id="@+id/tvTitleArena"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/sub_title_arena"
+                        android:textAppearance="@style/TextContent.SubHeading.Bold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="0dp"
+                        android:layout_height="198dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitleArena">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_penjumlahan"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/ivPenjumlahan"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="16dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/add_icon" />
+
+                                <TextView
+                                    android:id="@+id/tvPenjumlahan"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tv_penjumlahan"
+                                    android:textAppearance="@style/TextContent.Body.Bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.505"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/ivPenjumlahan"
+                                    app:layout_constraintVertical_bias="0.0" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_pengurangan"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/ivPengurangan"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="24dp"
+                                    app:layout_constraintBottom_toTopOf="@+id/tvPengurangan"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/subtract_icon" />
+
+                                <TextView
+                                    android:id="@+id/tvPengurangan"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:gravity="center"
+                                    android:text="@string/tv_pengurangan"
+                                    android:textAppearance="@style/TextContent.Body.Bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="0dp"
+                        android:layout_height="198dp"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_perkalian"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/tvPerkalian"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:text="@string/tv_perkalian"
+                                    android:textAppearance="@style/TextContent.Body.Bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.504"
+                                    app:layout_constraintStart_toStartOf="parent" />
+
+                                <ImageView
+                                    android:id="@+id/ivPerkalian"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginEnd="16dp"
+                                    app:layout_constraintBottom_toTopOf="@+id/tvPerkalian"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/multiply_icon" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="4dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraint_pembagian"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/tvPembagian"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:gravity="center"
+                                    android:text="@string/tv_pembagian"
+                                    android:textAppearance="@style/TextContent.Body.Bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
+
+                                <ImageView
+                                    android:id="@+id/ivPembagian"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginEnd="16dp"
+                                    app:layout_constraintBottom_toTopOf="@+id/tvPembagian"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/divine_icon" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="146dp"
+                android:layout_marginTop="120dp"
+                android:orientation="vertical"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="1dp">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp">
+                    android:layout_margin="8dp"
+                    app:cardElevation="4dp"
+                    app:cardCornerRadius="16dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraint_penjumlahan"
-                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:id="@+id/constraintuserRank"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
-                            android:id="@+id/ivPenjumlahan"
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:indeterminateTint="@color/blue_900"
+                            android:visibility="gone"
+                            android:elevation="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:visibility="visible"/>
+
+                        <TextView
+                            android:id="@+id/tvNoData"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="16dp"
+                            android:overScrollMode="never"
+                            android:text="@string/noData"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/add_icon" />
-
-                        <TextView
-                            android:id="@+id/tvPenjumlahan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/tv_penjumlahan"
-                            android:textAppearance="@style/TextContent.Body.Bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.505"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/ivPenjumlahan"
-                            app:layout_constraintVertical_bias="0.0" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraint_pengurangan"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                            tools:visibility="visible" />
 
                         <ImageView
-                            android:id="@+id/ivPengurangan"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/ivPeringkat"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="24dp"
-                            app:layout_constraintBottom_toTopOf="@+id/tvPengurangan"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tvRank"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/rank_icon" />
+
+                        <ImageView
+                            android:id="@+id/ivExp"
+                            android:layout_width="48dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/subtract_icon" />
+                            app:srcCompat="@drawable/exp_icon" />
 
                         <TextView
-                            android:id="@+id/tvPengurangan"
+                            android:id="@+id/tvPoints"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:gravity="center"
-                            android:text="@string/tv_pengurangan"
-                            android:textAppearance="@style/TextContent.Body.Bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            android:text="@string/tv_points"
+                            android:textAppearance="@style/TextContent.Heading.Bold"
+                            app:layout_constraintEnd_toEndOf="@+id/tvExpPoints"
+                            app:layout_constraintStart_toStartOf="@+id/tvExpPoints"
+                            app:layout_constraintTop_toTopOf="@+id/ivExp" />
+
+                        <TextView
+                            android:id="@+id/tvExpPoints"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/tv_exp_points"
+                            android:textAppearance="@style/TextContent.Caption"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivExp"
+                            app:layout_constraintStart_toEndOf="@+id/ivExp"
+                            app:layout_constraintTop_toBottomOf="@+id/tvPoints" />
+
+                        <TextView
+                            android:id="@+id/tvNumberRank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_number_rank"
+                            android:textAppearance="@style/TextContent.Heading.Bold"
+                            app:layout_constraintEnd_toEndOf="@+id/tvRank"
+                            app:layout_constraintStart_toStartOf="@+id/tvRank"
+                            app:layout_constraintTop_toTopOf="@+id/ivPeringkat" />
+
+                        <TextView
+                            android:id="@+id/tvRank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:text="@string/tv_rank"
+                            android:textAppearance="@style/TextContent.Caption"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivPeringkat"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <androidx.constraintlayout.widget.Group
+                            android:id="@+id/group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:constraint_referenced_ids="tvPoints,tvExpPoints" />
+
+                        <androidx.constraintlayout.widget.Group
+                            android:id="@+id/group2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:constraint_referenced_ids="tvPoints,tvExpPoints,ivExp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="0dp"
-                android:layout_height="198dp"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraint_perkalian"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/tvPerkalian"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="@string/tv_perkalian"
-                            android:textAppearance="@style/TextContent.Body.Bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.504"
-                            app:layout_constraintStart_toStartOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/ivPerkalian"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
-                            app:layout_constraintBottom_toTopOf="@+id/tvPerkalian"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/multiply_icon" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraint_pembagian"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/tvPembagian"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:gravity="center"
-                            android:text="@string/tv_pembagian"
-                            android:textAppearance="@style/TextContent.Body.Bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/ivPembagian"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
-                            app:layout_constraintBottom_toTopOf="@+id/tvPembagian"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/divine_icon" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_welcome"
-            android:layout_width="match_parent"
-            android:layout_height="196dp"
-            android:background="@color/yellow_300">
-
-            <TextView
-                android:id="@+id/tvWelcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/welcome_greeting"
-                android:textAppearance="@style/TextContent.Heading.Bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/sub_greeting"
-                android:textAppearance="@style/TextContent.Body.Bold"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
-
-            <ImageButton
-                android:id="@+id/historyButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:background="@color/yellow_300"
-                app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/tvWelcome"
-                app:layout_constraintTop_toTopOf="@+id/tvWelcome"
-                app:layout_constraintVertical_bias="0.312"
-                app:srcCompat="@drawable/baseline_history_36" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="146dp"
-        android:layout_marginTop="120dp"
-        android:orientation="vertical"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="16dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminateTint="@color/blue_900"
-                    android:visibility="gone"
-                    android:elevation="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible"/>
-
-                <TextView
-                    android:id="@+id/tvNoData"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:overScrollMode="never"
-                    android:text="@string/noData"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/ivPeringkat"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tvRank"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/rank_icon" />
-
-                <ImageView
-                    android:id="@+id/ivExp"
-                    android:layout_width="48dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/exp_icon" />
-
-                <TextView
-                    android:id="@+id/tvPoints"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv_points"
-                    android:textAppearance="@style/TextContent.Heading.Bold"
-                    app:layout_constraintEnd_toEndOf="@+id/tvExpPoints"
-                    app:layout_constraintStart_toStartOf="@+id/tvExpPoints"
-                    app:layout_constraintTop_toTopOf="@+id/ivExp" />
-
-                <TextView
-                    android:id="@+id/tvExpPoints"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/tv_exp_points"
-                    android:textAppearance="@style/TextContent.Caption"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivExp"
-                    app:layout_constraintStart_toEndOf="@+id/ivExp"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPoints" />
-
-                <TextView
-                    android:id="@+id/tvNumberRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv_number_rank"
-                    android:textAppearance="@style/TextContent.Heading.Bold"
-                    app:layout_constraintEnd_toEndOf="@+id/tvRank"
-                    app:layout_constraintStart_toStartOf="@+id/tvRank"
-                    app:layout_constraintTop_toTopOf="@+id/ivPeringkat" />
-
-                <TextView
-                    android:id="@+id/tvRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:text="@string/tv_rank"
-                    android:textAppearance="@style/TextContent.Caption"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivPeringkat"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/group"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="tvPoints,tvExpPoints" />
-
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/group2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="tvPoints,tvExpPoints,ivExp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
