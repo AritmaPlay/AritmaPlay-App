@@ -75,6 +75,7 @@ class ProfileFragment : Fragment() {
                     binding.tvUserName.visibility = View.VISIBLE
                     binding.tvUserName.text = data?.user?.username ?: "Unknown"
                     binding.tvLevel.text = "Level: ${data?.user?.level?.toString() ?: "0"}"
+                    binding.tvTotalQuiz.text = "Kuis Selesai: ${data?.stats?.quizDone.toString() ?: "0"}"
                     binding.experience.text = "Exp: ${data?.user?.totalExp?.toString() ?: "0"}"
                     Log.d("ProfileFragment", "fetchProfile: ${data?.stats}")
 

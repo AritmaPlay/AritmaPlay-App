@@ -127,16 +127,27 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/tvTotalQuiz"
+                            style="@style/TextContent.Body.Bold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:text="@string/total_quiz"
+                            android:textAppearance="@style/TextContent.Body.Bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/linearLayoutLevel"
+                            app:layout_constraintTop_toBottomOf="@+id/tvLevel" />
+
+                        <TextView
                             android:id="@+id/experience"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="11dp"
-                            android:layout_marginTop="8dp"
                             android:text="@string/exp"
                             android:textAppearance="@style/TextContent.Body.Bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/linearLayoutLevel"
-                            app:layout_constraintTop_toBottomOf="@id/tvLevel" />
+                            app:layout_constraintTop_toBottomOf="@id/tvTotalQuiz" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
