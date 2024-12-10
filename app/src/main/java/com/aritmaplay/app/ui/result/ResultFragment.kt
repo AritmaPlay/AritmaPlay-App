@@ -19,6 +19,10 @@ import com.aritmaplay.app.data.local.pref.UserPreference
 import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.databinding.FragmentResultBinding
 import kotlinx.coroutines.launch
+import nl.dionsegijn.konfetti.core.Party
+import nl.dionsegijn.konfetti.core.Position
+import nl.dionsegijn.konfetti.core.emitter.Emitter
+import java.util.concurrent.TimeUnit
 
 class ResultFragment : Fragment() {
     private val viewModel by viewModels<ResultViewModel> {
@@ -57,13 +61,21 @@ class ResultFragment : Fragment() {
             val second = duration % 60
             binding.tvTimeNumber.text = buildString {
                 append(minute)
-                append(":")
+                if (second < 10) {
+                    append(":0")
+                } else {
+                    append(":")
+                }
                 append(second)
             }
         } else {
             binding.tvTimeNumber.text = buildString {
                 append("0")
-                append(":")
+                if (duration < 10) {
+                    append(":0")
+                } else {
+                    append(":")
+                }
                 append(duration)
             }
         }
@@ -72,8 +84,8 @@ class ResultFragment : Fragment() {
             val userPreference = UserPreference.getInstance(requireContext().dataStore)
             userPreference.getSession().collect { user ->
                 if (user.isLogin) {
-                    viewModel.result(user.token, operation, 10, duration, correctAnswerCount)
                     viewModel.generateMotivation(user.name, correctAnswerCount, duration, 10, operation)
+                    viewModel.result(user.token, operation, 10, duration, correctAnswerCount)
                 }
             }
         }
@@ -106,6 +118,7 @@ class ResultFragment : Fragment() {
                     binding.tvMotivation.text = state.data.data
                     binding.progressBarResult.visibility = View.GONE
                     binding.constraintLayoutResult.visibility = View.VISIBLE
+                    binding.konfettiView.start(explode())
                 }
 
                 is Result.Error -> {
@@ -129,6 +142,20 @@ class ResultFragment : Fragment() {
             val directToQuiz = ResultFragmentDirections.actionResultFragmentToQuizFragment(operation)
             findNavController().navigate(directToQuiz)
         }
+    }
+
+    fun explode(): List<Party> {
+        return listOf(
+            Party(
+                speed = 0f,
+                maxSpeed = 30f,
+                damping = 0.9f,
+                spread = 360,
+                colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
+                emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100),
+                position = Position.Relative(0.5, 0.3)
+            )
+        )
     }
 
     override fun onDestroyView() {

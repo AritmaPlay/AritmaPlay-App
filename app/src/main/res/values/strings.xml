@@ -86,6 +86,7 @@
     <string name="question">... + 2 = 5</string>
     <string name="delete">Hapus</string>
     <string name="send">Kirim</string>
+    <string name="soal_selanjutnya">Selanjutnya</string>
 
     <!--result strings-->
     <string name="result">Hasil</string>

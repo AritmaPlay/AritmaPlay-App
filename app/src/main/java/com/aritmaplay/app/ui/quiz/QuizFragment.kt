@@ -1,6 +1,7 @@
 package com.aritmaplay.app.ui.quiz
 
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,13 +32,22 @@ class QuizFragment : Fragment() {
 
     private var startTime: Long = 0L
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentQuizBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private lateinit var correctSound: MediaPlayer
+    private lateinit var wrongSound: MediaPlayer
+
+    val indicators = mapOf(
+        1 to R.id.indicator1,
+        2 to R.id.indicator2,
+        3 to R.id.indicator3,
+        4 to R.id.indicator4,
+        5 to R.id.indicator5,
+        6 to R.id.indicator6,
+        7 to R.id.indicator7,
+        8 to R.id.indicator8,
+        9 to R.id.indicator9,
+        10 to R.id.indicator10
+    )
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,16 +66,24 @@ class QuizFragment : Fragment() {
             } else {
                 val bitmap = binding.drawView.saveAsBitmap()
                 viewModel.predict(bitmap, requireContext())
-                binding.drawView.clearCanvas(needsSaving = false)
-                isCanvasEmpty = true
             }
         }
 
         binding.deleteButton.setOnClickListener {
             binding.drawView.clearCanvas(needsSaving = false)
             isCanvasEmpty = true
-            Toast.makeText(requireContext(), "Canvas cleared!", Toast.LENGTH_SHORT).show()
         }
+
+        correctSound = MediaPlayer.create(context, R.raw.sound_correct)
+        wrongSound = MediaPlayer.create(context, R.raw.sound_wrong)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentQuizBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     private fun observeViewModel() {
@@ -73,12 +91,13 @@ class QuizFragment : Fragment() {
         viewModel.currentQuestion.observe(viewLifecycleOwner) { quizModel ->
             binding.tvQuestion.text = quizModel.question
         }
-        viewModel.predictResult.observe(requireActivity()) { state ->
+        viewModel.predictResult.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
                     binding.progressBar2.visibility = View.VISIBLE
                     Log.d("HandwritingPredict", "Predicting...")
+                    binding.sendButton.isEnabled = false
+                    binding.deleteButton.isEnabled = false
                 }
 
                 is Result.Success -> {
@@ -86,40 +105,12 @@ class QuizFragment : Fragment() {
                     val predictedAnswer = state.data.data.digit
                     val correctAnswer = viewModel.currentQuestion.value?.correctAnswer
                     Log.d("HandwritingPredict", "Predict: ${state.data.data}")
-                    if (predictedAnswer == correctAnswer) {
-                        val incrementCorrectAnswer = viewModel.incrementCorrectAnswer()
-                        Toast.makeText(requireContext(), "Jawaban benar! Total benar: $incrementCorrectAnswer", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(requireContext(), "Jawaban salah!", Toast.LENGTH_SHORT).show()
-                    }
-                    if (currentQuestion < 10) {
-                        currentQuestion++
-                        updateProgress()
-                        viewModel.generateNewQuestion(operation = args.operation)
-                    } else {
-                        Toast.makeText(requireContext(), "Semua pertanyaan selesai!", Toast.LENGTH_SHORT).show()
-                        val endTime = System.currentTimeMillis()
-                        val duration = viewModel.getDuration(startTime, endTime)
-                        val correctAnswerCount = viewModel.getCorrectAnswer()
-                        viewModel.resetCorrectAnswer()
-                        Toast.makeText(requireContext(), "Lama pengerjaan anda: $duration", Toast.LENGTH_SHORT).show()
-                        Log.d("QuizDuration", "Lama pengerjaan anda: $duration")
-                        val directToResult = QuizFragmentDirections.actionQuizFragmentToResultFragment(
-                            args.operation,
-                            correctAnswerCount,
-                            duration
-                        )
-                        findNavController().navigate(
-                            directToResult,
-                            NavOptions.Builder()
-                                .setPopUpTo(R.id.quizFragment, true)
-                                .build()
-                        )
+                    if (correctAnswer != null) {
+                        quizReview(predictedAnswer, correctAnswer)
                     }
                 }
 
                 is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
                     binding.progressBar2.visibility = View.GONE
                     Toast.makeText(requireContext(), "Error Loading Data", Toast.LENGTH_SHORT).show()
                     Log.e("HandwritingPredict", "Error: ${state.message}")
@@ -127,11 +118,7 @@ class QuizFragment : Fragment() {
             }
         }
     }
-    private fun updateProgress() {
-        val progressPercentage = (currentQuestion * 100) / 10
-        binding.progressBar.progress = progressPercentage
-        binding.tvProgress.text = currentQuestion.toString()
-    }
+
     private fun initDrawView() {
         binding.drawView.apply {
             brushSize = 55f
@@ -148,6 +135,61 @@ class QuizFragment : Fragment() {
             }
         }
     }
+
+    private fun quizReview(predictedAnswer: Int, correctAnswer: Int) {
+        if (predictedAnswer == correctAnswer) {
+            indicators[currentQuestion]?.let { binding.root.findViewById<View>(it).setBackgroundResource(R.drawable.indicator_correct) }
+            correctSound.start()
+            viewModel.incrementCorrectAnswer()
+            binding.tvCorrectTitle.text = "Jawaban kamu benar!"
+        } else {
+            indicators[currentQuestion]?.let { binding.root.findViewById<View>(it).setBackgroundResource(R.drawable.indicator_wrong) }
+            wrongSound.start()
+            binding.tvCorrectTitle.text = "Jawabanmu $predictedAnswer, kurang tepat!"
+            binding.tvCorrectAnswer.text = "Jawaban yang benar adalah $correctAnswer"
+            binding.tvCorrectAnswer.visibility = View.VISIBLE
+        }
+
+        currentQuestion++
+
+        binding.btNextQuiz.setOnClickListener {
+            binding.tvCorrectAnswer.visibility = View.INVISIBLE
+            binding.linearLayoutBottom.visibility = View.GONE
+            binding.drawView.clearCanvas(needsSaving = false)
+            isCanvasEmpty = true
+            indicators[currentQuestion]?.let { binding.root.findViewById<View>(it).setBackgroundResource(R.drawable.indicator_active) }
+
+            binding.sendButton.isEnabled = true
+            binding.deleteButton.isEnabled = true
+
+            if (currentQuestion <= 10) {
+                viewModel.generateNewQuestion(operation = args.operation)
+            } else {
+                val endTime = System.currentTimeMillis()
+                val duration = viewModel.getDuration(startTime, endTime)
+                val correctAnswerCount = viewModel.getCorrectAnswer()
+                viewModel.resetCorrectAnswer()
+
+                Log.d("QuizDuration", "Lama pengerjaan anda: $duration")
+
+                val directToResult = QuizFragmentDirections.actionQuizFragmentToResultFragment(
+                    args.operation,
+                    correctAnswerCount,
+                    duration
+                )
+
+                findNavController().navigate(
+                    directToResult,
+                    NavOptions.Builder()
+                        .setPopUpTo(R.id.quizFragment, true)
+                        .build()
+                )
+            }
+        }
+
+        binding.linearLayoutBottom.visibility = View.VISIBLE
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
