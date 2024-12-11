@@ -18,18 +18,28 @@
         <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".ui.onboarding.OnBoardingActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
             android:exported="true"
             android:theme="@style/Theme.AritmaPlay.SplashScreen">
             <intent-filter>
