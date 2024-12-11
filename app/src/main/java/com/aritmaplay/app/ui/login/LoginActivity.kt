@@ -151,7 +151,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToSignUpActivity() {
         startActivity(Intent(this, SignUpActivity::class.java))
-        finish()
     }
 
     private fun setupSystemBar() {
