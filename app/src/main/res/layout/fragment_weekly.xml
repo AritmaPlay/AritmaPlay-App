@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_button_primary"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:padding="16dp">
 
@@ -115,7 +115,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:overScrollMode="never"
-                android:text="@string/noData"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textAlignment="center"
+                android:text="@string/reset"
                 tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
