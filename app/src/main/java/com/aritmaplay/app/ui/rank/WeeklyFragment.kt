@@ -68,7 +68,6 @@ class WeeklyFragment : Fragment() {
                     binding.tvNameRank.visibility = View.GONE
                     binding.tvNumberListRank.visibility = View.INVISIBLE
                     binding.tvNameRank.visibility = View.INVISIBLE
-                    binding.tvExpRank.visibility = View.INVISIBLE
                     binding.linearLayoutIconRank.visibility = View.INVISIBLE
                 }
                 is Result.Success -> {
@@ -102,7 +101,7 @@ class WeeklyFragment : Fragment() {
                                 if (LoginUser == null) {
                                     binding.tvNumberListRank.text = getString(R.string.list_number_rank)
                                     binding.tvExpRank.visibility = View.GONE
-                                    binding.tvNameRank.text = getString(R.string.first_time_user)
+                                    binding.tvNameRank.text = getString(R.string.top_ten)
                                     binding.linearLayoutIconRank.visibility = View.INVISIBLE
 
                                 } else {

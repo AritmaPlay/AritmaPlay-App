@@ -111,7 +111,9 @@
     <string name="all_rank">Semua Peringkat</string>
     <string name="my_rank">Peringkat Anda</string>
     <string name="first_time_user">Mulai dulu yuk!</string>
+    <string name="top_ten">Ayo Kejar Top 10!</string>
     <string name="weekly_rank">Mingguan</string>
     <string name="all_time_rank">Sepanjang Masa</string>
+    <string name="reset">Peringkat minggu ini baru dimulai, tunjukkan kemampuanmu!</string>
 
 </resources>
