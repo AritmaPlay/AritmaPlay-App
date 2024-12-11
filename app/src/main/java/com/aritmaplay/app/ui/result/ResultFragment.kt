@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +21,7 @@ import com.aritmaplay.app.data.Result
 import com.aritmaplay.app.data.local.pref.UserPreference
 import com.aritmaplay.app.data.local.pref.dataStore
 import com.aritmaplay.app.databinding.FragmentResultBinding
+import com.aritmaplay.app.ui.login.LoginViewModel
 import kotlinx.coroutines.launch
 import nl.dionsegijn.konfetti.core.Party
 import nl.dionsegijn.konfetti.core.Position
@@ -28,6 +30,9 @@ import java.util.concurrent.TimeUnit
 
 class ResultFragment : Fragment() {
     private val viewModel by viewModels<ResultViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
+    private val loginViewModel by viewModels<LoginViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
 
@@ -87,31 +92,13 @@ class ResultFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
-            val userPreference = UserPreference.getInstance(requireContext().dataStore)
-            userPreference.getSession().collect { user ->
-                if (user.isLogin) {
-                    viewModel.generateMotivation(user.name, correctAnswerCount, duration, 10, operation)
-                    viewModel.result(user.token, operation, 10, duration, correctAnswerCount, user.userId)
-                }
-            }
-        }
-
-        viewModel.quizResult.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is Result.Loading -> {
-                    Log.d("ResultFragment", "Loading user data...")
-                }
-
-                is Result.Success -> {
-                    Log.d("ResultFragment", "Success: User data posted successfully!")
-                    Log.d("ResultFragment", "Data yang dikirim: ${state.data.data?.quiz}")
-                }
-
-                is Result.Error -> {
-                    Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
-                    Log.e("ResultFragment", "Error: ${state.message}")
-                }
+        loginViewModel.getSession().observe(viewLifecycleOwner) { user ->
+            if (user.isLogin) {
+                Log.d("ResultFragment", "Token: ${user.token}")
+                viewModel.generateMotivation(
+                    user.name, correctAnswerCount, duration, 10, operation
+                )
+                quizResult(user.token, operation, 10, duration, correctAnswerCount, user.userId)
             }
         }
 
@@ -169,6 +156,27 @@ class ResultFragment : Fragment() {
                 position = Position.Relative(0.5, 0.3)
             )
         )
+    }
+
+    private fun quizResult(token: String, quizMode: String, totalQuestion: Int, quizTime: Int, correctQuestion: Int, userId: Int) {
+        viewModel.result("Bearer $token", quizMode, totalQuestion, quizTime, correctQuestion, userId)
+        viewModel.quizResult.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is Result.Loading -> {
+                    Log.d("ResultFragment", "Loading user data...")
+                }
+
+                is Result.Success -> {
+                    Log.d("ResultFragment", "Success: User data posted successfully!")
+                    Log.d("ResultFragment", "Data yang dikirim: ${state.data.data?.quiz}")
+                }
+
+                is Result.Error -> {
+                    Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+                    Log.e("ResultFragment", "Error: ${state.message}")
+                }
+            }
+        }
     }
 
     private fun playAnimation() {
