@@ -112,9 +112,9 @@ class LoginActivity : AppCompatActivity() {
                                     name = name
                                 )
                             )
-                            Log.d("LoginActivity", "Session saved: token=$token, userId=$userId")
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                            finish()
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
                         } else {
                             Log.e("LoginActivity", "Token or User ID is null")
                             Toast.makeText(this@LoginActivity, "Data login tidak valid", Toast.LENGTH_SHORT).show()
