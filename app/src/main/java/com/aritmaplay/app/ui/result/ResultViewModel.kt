@@ -5,10 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aritmaplay.app.data.Result
+import com.aritmaplay.app.data.remote.response.error.ErrorResponse
 import com.aritmaplay.app.data.remote.response.result.ResultResponse
 import com.aritmaplay.app.data.remote.response.vertexai.generate.VertexAIGenerateMotivationResponse
 import com.aritmaplay.app.repository.ResultRepository
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
 class ResultViewModel(private val resultRepository: ResultRepository) : ViewModel() {
 
@@ -39,8 +43,15 @@ class ResultViewModel(private val resultRepository: ResultRepository) : ViewMode
                 val replacedName = response.data?.replace("Aritma", userName)
                 response.data = replacedName
                 _motivation.value = Result.Success(response)
+            } catch (e: HttpException) {
+                val jsonInString = e.response()?.errorBody()?.string()
+                val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+                val errorMessage = errorBody.message
+                _motivation.value = errorMessage?.let { Result.Error(it) }
+            } catch (e: IOException) {
+                _motivation.value = Result.Error("Network error occurred. Please try again.")
             } catch (e: Exception) {
-                _motivation.value = Result.Error(e.toString())
+                _motivation.value = Result.Error("Unexpected error occurred: ${e.message}")
             }
         }
     }
