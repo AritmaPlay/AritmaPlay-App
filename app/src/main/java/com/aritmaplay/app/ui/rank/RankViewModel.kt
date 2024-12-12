@@ -5,10 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aritmaplay.app.data.Result
+import com.aritmaplay.app.data.remote.response.error.ErrorResponse
 import com.aritmaplay.app.data.remote.response.leaderboard.AllTimeLeaderboardResponse
 import com.aritmaplay.app.data.remote.response.leaderboard.WeeklyLeaderboardResponse
 import com.aritmaplay.app.repository.LeaderboardRepository
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
 class RankViewModel (private val repository: LeaderboardRepository) : ViewModel() {
 
@@ -24,8 +28,15 @@ class RankViewModel (private val repository: LeaderboardRepository) : ViewModel(
             try {
                 val response = repository.getWeeklyLeaderboard(token)
                 _weeklyLeaderboardList.value = Result.Success(response)
+            } catch (e: HttpException) {
+                val jsonInString = e.response()?.errorBody()?.string()
+                val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+                val errorMessage = errorBody.message
+                _weeklyLeaderboardList.value = errorMessage?.let { Result.Error(it) }
+            } catch (e: IOException) {
+                _weeklyLeaderboardList.value = Result.Error("Network error occurred. Please try again.")
             } catch (e: Exception) {
-                _weeklyLeaderboardList.value = Result.Error(e.toString())
+                _weeklyLeaderboardList.value = Result.Error("Unexpected error occurred: ${e.message}")
             }
         }
     }
@@ -36,8 +47,15 @@ class RankViewModel (private val repository: LeaderboardRepository) : ViewModel(
             try {
                 val response = repository.getAllTimeLeaderboard(token)
                 _allTimeLeaderboardList.value = Result.Success(response)
+            } catch (e: HttpException) {
+                val jsonInString = e.response()?.errorBody()?.string()
+                val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+                val errorMessage = errorBody.message
+                _allTimeLeaderboardList.value = errorMessage?.let { Result.Error(it) }
+            } catch (e: IOException) {
+                _allTimeLeaderboardList.value = Result.Error("Network error occurred. Please try again.")
             } catch (e: Exception) {
-                _allTimeLeaderboardList.value = Result.Error(e.toString())
+                _allTimeLeaderboardList.value = Result.Error("Unexpected error occurred: ${e.message}")
             }
         }
     }

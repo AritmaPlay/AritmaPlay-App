@@ -134,7 +134,7 @@ class AllTimeFragment : Fragment() {
                     binding.linearLayoutIconRank.visibility = View.INVISIBLE
                     binding.tvMyRankTitle.visibility = View.INVISIBLE
                     binding.tvAllRankTitle.visibility = View.INVISIBLE
-                    Toast.makeText(requireContext(), "Error loading data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -1,6 +1,5 @@
 package com.aritmaplay.app.ui.profile
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -46,7 +45,7 @@ class ProfileFragment : Fragment() {
         lifecycleScope.launch {
             userPreference.getSession().collect { user ->
                 if (user.isLogin) {
-                    fetchProfile(user.token, user.userId)
+                    viewModel.getProfile("Bearer ${user.token}", user.userId)
                 } else {
                     Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT).show()
                 }
@@ -59,23 +58,22 @@ class ProfileFragment : Fragment() {
                 startActivity(Intent(requireContext(), OnBoardingActivity::class.java))
             }
         }
-    }
 
-    @SuppressLint("SetTextI18n")
-    private fun fetchProfile(token: String, userId: Int) {
-        viewModel.getProfile("Bearer $token", userId).observe(viewLifecycleOwner) { result ->
+        viewModel.profileResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.tvUserName.visibility = View.INVISIBLE
                 }
+
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     val data = result.data.data
                     binding.tvUserName.visibility = View.VISIBLE
                     binding.tvUserName.text = data?.user?.username ?: "Unknown"
                     binding.tvLevel.text = "Level: ${data?.user?.level?.toString() ?: "0"}"
-                    binding.tvTotalQuiz.text = "Kuis Selesai: ${data?.stats?.quizDone.toString() ?: "0"}"
+                    binding.tvTotalQuiz.text =
+                        "Kuis Selesai: ${data?.stats?.quizDone.toString() ?: "0"}"
                     binding.experience.text = "Exp: ${data?.user?.totalExp?.toString() ?: "0"}"
                     Log.d("ProfileFragment", "fetchProfile: ${data?.stats}")
 
@@ -102,9 +100,10 @@ class ProfileFragment : Fragment() {
                         .error(R.drawable.ic_baseline_person_24)
                         .into(binding.profileImageView)
                 }
+
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(context, "Error Loading Data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

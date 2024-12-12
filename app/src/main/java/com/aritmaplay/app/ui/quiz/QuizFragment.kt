@@ -118,7 +118,7 @@ class QuizFragment : Fragment() {
 
                 is Result.Error -> {
                     binding.progressBar2.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Error Loading Data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                     Log.e("HandwritingPredict", "Error: ${state.message}")
                 }
             }

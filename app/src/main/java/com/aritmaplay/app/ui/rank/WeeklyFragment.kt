@@ -64,6 +64,7 @@ class WeeklyFragment : Fragment() {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.rvRank.visibility = View.GONE
                     binding.tvNoData.visibility = View.GONE
+                    binding.tvNoInternet.visibility = View.GONE
                     binding.tvExpRank.visibility = View.INVISIBLE
                     binding.tvNameRank.visibility = View.GONE
                     binding.tvNumberListRank.visibility = View.INVISIBLE
@@ -83,6 +84,7 @@ class WeeklyFragment : Fragment() {
                             Log.d("RankFragment", "Entries tersedia: Menampilkan RecyclerView.")
                             binding.rvRank.visibility = View.VISIBLE
                             binding.tvNoData.visibility = View.GONE
+                            binding.tvNoInternet.visibility = View.GONE
                             binding.tvExpRank.visibility = View.VISIBLE
                             binding.tvNameRank.visibility = View.VISIBLE
                             binding.tvNumberListRank.visibility = View.VISIBLE
@@ -127,7 +129,8 @@ class WeeklyFragment : Fragment() {
                     Log.e("RankFragment", "Error state: ${result.message}")
                     binding.progressBar.visibility = View.GONE
                     binding.rvRank.visibility = View.GONE
-                    binding.tvNoData.visibility = View.VISIBLE
+                    binding.tvNoData.visibility = View.GONE
+                    binding.tvNoInternet.visibility = View.VISIBLE
                     binding.tvExpRank.visibility = View.INVISIBLE
                     binding.constraintLayoutMyRank.visibility = View.INVISIBLE
                     binding.tvNameRank.visibility = View.INVISIBLE
@@ -135,7 +138,7 @@ class WeeklyFragment : Fragment() {
                     binding.linearLayoutIconRank.visibility = View.INVISIBLE
                     binding.tvMyRankTitle.visibility = View.INVISIBLE
                     binding.tvAllRankTitle.visibility = View.INVISIBLE
-                    Toast.makeText(requireContext(), "Error loading data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

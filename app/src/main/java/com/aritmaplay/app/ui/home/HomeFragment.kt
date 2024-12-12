@@ -1,6 +1,5 @@
 package com.aritmaplay.app.ui.home
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -88,20 +87,15 @@ class HomeFragment : Fragment() {
                             val firstName = index.let { user.name.substring(0, it) }.toString().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
                             binding.tvWelcome.text = "Selamat Datang, $firstName!"
                         }
-                        fetchProfile(user.token, user.userId)
+                        viewModel.getProfile("Bearer ${user.token}", user.userId)
                     } else {
-                        Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(context, "Silakan login terlebih dahulu", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
-    }
 
-
-    @SuppressLint("SetTextI18n")
-    private fun fetchProfile(token: String, userId: Int) {
-        viewModel.getProfile("Bearer $token", userId).observe(viewLifecycleOwner) { result ->
+        viewModel.profileResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -138,8 +132,6 @@ class HomeFragment : Fragment() {
                     binding.tvNoData.visibility = View.VISIBLE
                     Toast.makeText(requireContext(), "Error loading data", Toast.LENGTH_SHORT).show()
                 }
-
-                else -> {}
             }
         }
     }

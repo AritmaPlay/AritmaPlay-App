@@ -5,7 +5,6 @@ import com.aritmaplay.app.data.remote.response.leaderboard.WeeklyLeaderboardResp
 import com.aritmaplay.app.data.remote.response.quiz.QuizHistoryResponse
 import com.aritmaplay.app.data.remote.response.result.ResultResponse
 import com.aritmaplay.app.data.remote.response.user.ProfileResponse
-import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -18,7 +17,7 @@ interface ProfileApiService {
     suspend fun getProfile(
         @Header("Authorization") token: String,
         @Path("id") userId: Int
-    ): Response<ProfileResponse>
+    ): ProfileResponse
 
     @GET("/api/leaderboard-active")
     suspend fun getWeeklyLeaderboard(
