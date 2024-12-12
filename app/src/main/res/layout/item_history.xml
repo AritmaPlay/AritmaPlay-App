@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_full_rounded_white"
+    android:elevation="4dp"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutIcon"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_full_rounded_gray"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivArenaHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/add_icon" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvModeHistory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/mode_petualangan"
+        android:textAppearance="@style/TextContent.Body.Bold"
+        app:layout_constraintEnd_toStartOf="@id/tvJumlahXp"
+        app:layout_constraintStart_toEndOf="@id/linearLayoutIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvJumlahHistory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:text="@string/jumlah_history"
+        android:textAppearance="@style/TextContent.Caption"
+        app:layout_constraintEnd_toStartOf="@id/tvJumlahXp"
+        app:layout_constraintStart_toEndOf="@id/linearLayoutIcon"
+        app:layout_constraintTop_toBottomOf="@id/tvModeHistory" />
+
+    <TextView
+        android:id="@+id/tvJumlahXp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/jumlah_xp"
+        android:textAppearance="@style/TextContent.Body.Bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvQuizDuration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/duration"
+        app:layout_constraintEnd_toEndOf="@+id/tvJumlahHistory"
+        app:layout_constraintStart_toStartOf="@+id/tvJumlahHistory"
+        app:layout_constraintTop_toBottomOf="@+id/tvJumlahHistory" />
+</androidx.constraintlayout.widget.ConstraintLayout>

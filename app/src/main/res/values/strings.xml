@@ -1,3 +1,119 @@
 <resources>
     <string name="app_name">AritmaPlay</string>
+    <string name="test">The quick brown fox jumps over the lazy dog</string>
+    <string name="test2">80 EXP</string>
+    <string name="test3">Beli</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_rank">Peringkat</string>
+    <string name="title_profile">Profil</string>
+    <string name="sub_title_arena">Arena Petualangan</string>
+    <string name="tv_penjumlahan">Penjumlahan</string>
+    <string name="tv_pengurangan">Pengurangan</string>
+    <string name="welcome_greeting">Selamat Datang, </string>
+    <string name="sub_greeting">Siap berpetualang hari ini?</string>
+    <string name="tv_perkalian">Perkalian</string>
+    <string name="tv_pembagian">Pembagian</string>
+    <string name="tv_exp_points">EXP Points</string>
+    <string name="tv_points">0</string>
+    <string name="tv_number_rank">0</string>
+    <string name="tv_rank">Peringkat</string>
+    <string name="splash_screen_icon">AritmaPlay icon</string>
+
+    <!--onboarding strings-->
+    <string name="skip">Lewati</string>
+    <string name="onboarding_image">Gambar on boarding</string>
+    <string name="onboarding_text1">Ayo Mulai Petualangan Matematika</string>
+    <string name="onboarding_text2">Setiap Soal Adalah Petualangan Baru</string>
+    <string name="onboarding_text3">Bermain, Belajar, dan Bertumbuh Bersama!</string>
+    <string name="next">Selanjutnya</string>
+    <string name="start">Ayo Mulai</string>
+
+    <!-- riwayat pengerjaan strings -->
+    <string name="title_history">Riwayat Pengerjaan</string>
+    <string name="mode_petualangan">Mode Penjumlahan</string>
+    <string name="jumlah_history">8/10</string>
+    <string name="jumlah_xp">+800XP</string>
+    <string name="duration">0</string>
+
+    <!--login strings-->
+    <string name="hint_email">Masukkan email</string>
+    <string name="error_email">Email tidak valid</string>
+    <string name="error_password">Password tidak boleh kurang dari 8 karakter</string>
+    <string name="hint_password">Masukkan password</string>
+    <string name="login_title">Masuk untuk Berpetualang</string>
+    <string name="login_image">Gambar login</string>
+    <string name="email">E-Mail</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Daftar</string>
+    <string name="login">Masuk</string>
+
+
+    <!--sign up strings-->
+    <string name="hint_name">Masukkan nama</string>
+    <string name="name">Nama</string>
+    <string name="password_confirmation">Konfirmasi Password</string>
+    <string name="signup_title">Daftar untuk Bergabung dengan Petualang Lain</string>
+    <string name="password_mismatch_message">Password tidak sama</string>
+    <string name="user_name_title">Username</string>
+
+    <!--profil strings-->
+    <string name="profile_image">Gambar profil</string>
+    <string name="user_name">Budi</string>
+    <string name="akurasi_title">Akurasi</string>
+    <string name="level">Level:</string>
+    <string name="exp">Exp:</string>
+    <string name="total_quiz_title">Kuis Selesai</string>
+    <string name="total_quiz">Kuis Selesai:</string>
+    <string name="success_rate_title">Tingkat Keberhasilan</string>
+    <string name="success_rate">%</string>
+    <string name="sum_title">Penjumlahan</string>
+    <string name="sum_rate">%</string>
+    <string name="subtract_title">Pengurangan</string>
+    <string name="subtract_rate">%</string>
+    <string name="multiply_title">Perkalian</string>
+    <string name="multiply_rate">%</string>
+    <string name="divide_title">Pembagian</string>
+    <string name="divide_rate">%</string>
+    <string name="logout">Keluar</string>
+    <string name="badge_exp">badge exp</string>
+
+    <!--quiz strings -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="quiz_mode">Mode Penjumlahan</string>
+    <string name="quiz_now">1</string>
+    <string name="total_quiz_progress">/10</string>
+    <string name="question">... + 2 = 5</string>
+    <string name="delete">Hapus</string>
+    <string name="send">Kirim</string>
+    <string name="soal_selanjutnya">Selanjutnya</string>
+
+    <!--result strings-->
+    <string name="result">Hasil</string>
+    <string name="exp_result">80</string>
+    <string name="exp_title">EXP</string>
+    <string name="rank_title">Peringkatmu saat ini</string>
+    <string name="rank_result">9</string>
+    <string name="feedback">Tidak apa-apa kalau jawabanmu belum tepat! Setiap kesalahan adalah langkah menuju keberhasilan. Yang penting kamu sudah berusaha, dan dengan latihan, kamu akan makin jago. Terus semangat belajar, ya! Kesalahan ini adalah bagian dari proses belajar, jadi tetaplah percaya diri! 🌟</string>
+    <string name="go_title">Mulai Lagi!</string>
+    <string name="title_result">Hasil Akhir</string>
+    <string name="quiz_selesai_yeay">Quiz selesai yeay!</string>
+    <string name="akurasi">Akurasi</string>
+    <string name="waktu">Waktu</string>
+    <string name="image_result">Image Result</string>
+
+    <!--rank strings -->
+    <string name="list_number_rank">0</string>
+    <string name="nama_rank">-</string>
+    <string name="jumlah_exp_rank">0 EXP</string>
+    <string name="title_peringkat">Peringkat</string>
+    <string name="noData">Tidak ada data</string>
+    <string name="all_rank">Semua Peringkat</string>
+    <string name="my_rank">Peringkat Anda</string>
+    <string name="first_time_user">Mulai dulu yuk!</string>
+    <string name="top_ten">Ayo Kejar Top 10!</string>
+    <string name="weekly_rank">Mingguan</string>
+    <string name="all_time_rank">Sepanjang Masa</string>
+    <string name="reset">Peringkat minggu ini baru dimulai, tunjukkan kemampuanmu!</string>
+
 </resources>
