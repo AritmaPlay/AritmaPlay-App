@@ -86,7 +86,7 @@ class HistoryFragment : Fragment() {
                     binding.progressBar2.visibility = View.GONE
                     binding.rvHistory.visibility = View.GONE
                     binding.tvNoDataHistory.visibility = View.VISIBLE
-                    Toast.makeText(requireContext(), "Error loading data", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT)
                         .show()
                 }
             }
