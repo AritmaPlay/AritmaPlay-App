@@ -27,7 +27,7 @@
 
 ### Prerequisites
 - Android Studio installed on your machine.
-- Minimum SDK version required: 34.
+- Minimum SDK version required: 24.
 - Ensure you have **Java/Kotlin** setup for Android development.
 
 ### Steps
